@@ -244,6 +244,43 @@
     [data-reveal]{opacity:1;transform:none}
     .hero-logo{animation:none}
   }
+
+  /* ---------- CATERING ---------- */
+  #catering{background:var(--cream-2)}
+  .tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.4rem;margin-top:2rem}
+  .tier{position:relative;display:flex;flex-direction:column;background:var(--card);
+    border:3px solid var(--ink);border-radius:20px;box-shadow:var(--shadow);padding:1.5rem 1.5rem 1.6rem;
+    transition:transform .14s ease,box-shadow .14s ease}
+  .tier:hover{transform:translate(3px,3px);box-shadow:3px 3px 0 var(--ink)}
+  .tier.popular{background:var(--red);color:var(--cream);box-shadow:6px 6px 0 var(--red-deep)}
+  .tier.popular:hover{box-shadow:3px 3px 0 var(--red-deep)}
+  .tier .flag{position:absolute;top:-15px;left:1.4rem;font-weight:700;font-size:.66rem;letter-spacing:.1em;
+    text-transform:uppercase;background:var(--ink);color:var(--cream);padding:.35rem .7rem;border-radius:999px}
+  .tier h3{font-weight:700;font-size:1.35rem;letter-spacing:-.01em}
+  .tier .price{font-weight:700;font-size:2rem;line-height:1;margin:.6rem 0 .1rem}
+  .tier .price span{font-size:.9rem;font-weight:600;opacity:.7}
+  .tier .tier-sub{font-weight:600;font-size:.9rem;opacity:.8;margin-bottom:1rem}
+  .tier ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.55rem}
+  .tier li{position:relative;padding-left:1.4rem;font-weight:500;font-size:.95rem;line-height:1.4}
+  .tier li::before{content:"";position:absolute;left:0;top:.36rem;width:9px;height:9px;border-radius:50%;
+    background:var(--red);border:2px solid var(--ink)}
+  .tier.popular li::before{background:var(--cream);border-color:var(--cream)}
+  .cater-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:1.6rem;margin-top:2rem;align-items:start}
+  .cater-menu,.cater-cta{border:3px solid var(--ink);border-radius:20px;background:var(--card);
+    box-shadow:var(--shadow);padding:1.6rem 1.7rem}
+  .cater-cta{background:var(--red);color:var(--cream);box-shadow:6px 6px 0 var(--red-deep)}
+  .cater-menu h3,.cater-cta h3{font-weight:700;font-size:1.3rem;margin-bottom:.9rem}
+  .cater-col h4{font-weight:700;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--red-deep);margin:1rem 0 .5rem}
+  .cater-cols{display:grid;grid-template-columns:1fr 1fr;gap:.6rem 1.4rem}
+  .cater-menu ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.35rem}
+  .cater-menu li{font-weight:500;font-size:.92rem;line-height:1.35}
+  .cater-cta p{font-weight:500;font-size:1rem;line-height:1.55;margin-bottom:1.2rem}
+  .cater-cta a.btn{margin-top:.2rem}
+  .cater-contact{font-weight:600;font-size:1rem;margin-top:1.2rem;line-height:1.7}
+  .cater-contact a{color:var(--cream);text-decoration:underline}
+  .cater-fine{font-weight:500;font-size:.82rem;opacity:.72;margin-top:1.6rem;max-width:60ch}
+  @media(max-width:760px){.cater-grid{grid-template-columns:1fr}.cater-cols{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -278,6 +315,7 @@
       <a href="#menu">Menu</a>
       <a href="#build">Create Your Own</a>
       <a href="#about">About</a>
+      <a href="#catering">Catering</a>
       <a href="#visit" class="btn btn-red nav-cta">Visit us</a>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">☰</button>
@@ -519,6 +557,103 @@
         </div>
       </div>
       <div class="photo" data-reveal>ADD PHOTO — a crêpe in hand, the griddle, or your storefront (4:5 portrait)</div>
+    </div>
+  </section>
+
+  <!-- ============ CATERING ============ -->
+  <section class="section" id="catering">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow"><svg class="poppy-accent" aria-hidden="true"><use href="#poppy"/></svg>Event catering</span>
+        <h2 class="title">Bring Poppy to your party.</h2>
+        <p class="lede">A live crêpe station for weddings, showers, corporate events, and celebrations across Utah &mdash; our chef folds them fresh in front of your guests. Sweet, savory, French &amp; Japanese style, made to order.</p>
+      </div>
+
+      <div class="tiers">
+        <div class="tier" data-reveal>
+          <h3>The Sweet Cart</h3>
+          <div class="price">$14 <span>/ guest</span></div>
+          <p class="tier-sub">Dessert crêpes, live station</p>
+          <ul>
+            <li>Choice of sweet crêpes, folded to order</li>
+            <li>Fresh fruit, creams &amp; sauces bar</li>
+            <li>2 hours of live griddle service</li>
+            <li>Compostable plates, forks &amp; napkins</li>
+            <li>Setup &amp; cleanup included</li>
+          </ul>
+        </div>
+
+        <div class="tier popular" data-reveal>
+          <span class="flag">Most popular</span>
+          <h3>Sweet &amp; Savory</h3>
+          <div class="price">$17 <span>/ guest</span></div>
+          <p class="tier-sub">The full crêpe menu</p>
+          <ul>
+            <li>Full sweet <em>and</em> savory crêpe menu</li>
+            <li>Signature &amp; build-your-own options</li>
+            <li>2 hours of live griddle service</li>
+            <li>All serveware &amp; a station attendant</li>
+            <li>Setup &amp; cleanup included</li>
+          </ul>
+        </div>
+
+        <div class="tier" data-reveal>
+          <h3>The Full Poppy</h3>
+          <div class="price">$22 <span>/ guest</span></div>
+          <p class="tier-sub">Crêpes + sips + a cold bar</p>
+          <ul>
+            <li>Everything in Sweet &amp; Savory</li>
+            <li>Espresso, pour-over &amp; tea bar</li>
+            <li>Ice cream &amp; gelato scoop station</li>
+            <li>3 hours of full-service catering</li>
+            <li>Custom menu &amp; branded touches</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cater-grid">
+        <div class="cater-menu" data-reveal>
+          <h3>A taste of the catering menu</h3>
+          <div class="cater-cols">
+            <div class="cater-col">
+              <h4>Sweet</h4>
+              <ul>
+                <li>Mnt Poppy &mdash; lemon curd &amp; raspberry</li>
+                <li>Nutella, strawberry &amp; chantilly</li>
+                <li>Biscoff &amp; banana</li>
+                <li>Matcha cream &amp; red bean</li>
+                <li>S&rsquo;mores &amp; toasted marshmallow</li>
+              </ul>
+            </div>
+            <div class="cater-col">
+              <h4>Savory</h4>
+              <ul>
+                <li>Ham, gruyère &amp; egg</li>
+                <li>Chicken pesto &amp; mozzarella</li>
+                <li>Spinach, mushroom &amp; swiss</li>
+                <li>Smoked salmon &amp; herbed cream</li>
+                <li>Build your own &mdash; pick your fillings</li>
+              </ul>
+            </div>
+          </div>
+          <h4>To sip &amp; scoop</h4>
+          <ul>
+            <li>Espresso, pour-over coffee &amp; loose-leaf tea · ice cream &amp; gelato</li>
+          </ul>
+        </div>
+
+        <div class="cater-cta" data-reveal>
+          <h3>Request a quote</h3>
+          <p>Tell us your date, headcount, and location and we&rsquo;ll build a menu for your event. Serving Alpine and all of Utah.</p>
+          <a class="btn btn-cream" href="mailto:catering@poppycrepes.com?subject=Catering%20inquiry&amp;body=Event%20date%3A%0AGuest%20count%3A%0ALocation%3A%0ADetails%3A">Email our catering team</a>
+          <div class="cater-contact">
+            <a href="mailto:catering@poppycrepes.com">catering@poppycrepes.com</a><br>
+            <a href="tel:+18010000000">(801) 000-0000</a>
+          </div>
+        </div>
+      </div>
+
+      <p class="cater-fine" data-reveal>25-guest minimum · $500 event minimum · prices per guest before service fee &amp; tax · travel beyond 20 miles of Alpine billed at cost · book 2+ weeks ahead when you can.</p>
     </div>
   </section>
 
