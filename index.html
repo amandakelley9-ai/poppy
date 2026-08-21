@@ -144,13 +144,16 @@
   .crepe.hide{display:none}
   .crepe.signature{background:var(--red);color:var(--cream);box-shadow:6px 6px 0 var(--red-deep)}
   .crepe.signature:hover{box-shadow:3px 3px 0 var(--red-deep)}
-  .crepe-top{display:flex;align-items:flex-start;justify-content:space-between;gap:.6rem;margin-bottom:.5rem}
+  .crepe-top{display:flex;align-items:flex-start;justify-content:space-between;gap:.6rem;margin-bottom:.5rem;flex-wrap:wrap}
   .crepe h3{font-weight:700;font-size:1.28rem;line-height:1.1;letter-spacing:-.01em}
   .tag{flex:none;font-weight:700;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
     padding:.28rem .6rem;border-radius:999px;border:2.5px solid var(--ink)}
-  .tag.sweet{background:var(--cream);color:var(--ink)}
+  .tag.sweet,.tag.veg{background:var(--cream);color:var(--ink)}
   .tag.savory{background:var(--ink);color:var(--cream)}
-  .crepe.signature .tag.sweet{background:var(--cream);color:var(--ink);border-color:var(--cream)}
+  .tag.new{background:var(--red);color:var(--cream)}
+  .crepe.signature .tag.sweet,.crepe.signature .tag.veg{background:var(--cream);color:var(--ink);border-color:var(--cream)}
+  .crepe.signature .tag.new{background:var(--cream);color:var(--red-deep);border-color:var(--cream)}
+  .crepe.signature .tag.savory{border-color:var(--cream)}
   .star{display:inline-flex;align-items:center;gap:.35rem;font-weight:700;font-size:.72rem;
     letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem}
   .star .poppy-accent{width:16px}
@@ -378,17 +381,32 @@
           <button class="filter" data-filter="all" aria-pressed="true">All</button>
           <button class="filter" data-filter="sweet" aria-pressed="false">Sweet</button>
           <button class="filter" data-filter="savory" aria-pressed="false">Savory</button>
+          <button class="filter" data-filter="signature" aria-pressed="false">Signature</button>
         </div>
       </div>
 
       <div class="menu-grid" id="menuGrid">
 
-        <!-- SIGNATURE -->
-        <article class="crepe signature" data-cat="sweet" data-reveal>
+        <!-- SWEET -->
+        <article class="crepe signature" data-cat="sweet signature" data-reveal>
           <div class="star"><svg class="poppy-accent" aria-hidden="true"><use href="#poppy"/></svg>Signature</div>
           <div class="crepe-top"><h3>Mnt Poppy</h3><span class="tag sweet">Sweet</span></div>
           <p class="ing">Lemon curd, soaked poppyseeds, raspberry powder, fresh raspberries, chantilly cream &amp; raspberry sauce.</p>
           <div class="base">Poppyseed crêpe</div>
+        </article>
+
+        <article class="crepe signature" data-cat="sweet signature" data-reveal>
+          <div class="star"><svg class="poppy-accent" aria-hidden="true"><use href="#poppy"/></svg>Signature</div>
+          <div class="crepe-top"><h3>The Beehive</h3><span class="tag new">New</span><span class="tag sweet">Sweet</span></div>
+          <p class="ing">Whipped honey butter, cinnamon sugar &amp; a pinch of flaky salt. A Utah scone that went to Paris and came back.</p>
+          <div class="base">Sweet crêpe</div>
+        </article>
+
+        <article class="crepe signature" data-cat="sweet signature" data-reveal>
+          <div class="star"><svg class="poppy-accent" aria-hidden="true"><use href="#poppy"/></svg>Signature</div>
+          <div class="crepe-top"><h3>Dirty Doctor</h3><span class="tag new">New</span><span class="tag sweet">Sweet</span></div>
+          <p class="ing">Peppered cola &amp; raspberry reduction, coconut cream whip, vanilla mascarpone. You know exactly what this is.</p>
+          <div class="base">Sweet crêpe</div>
         </article>
 
         <article class="crepe" data-cat="sweet" data-reveal>
@@ -398,26 +416,22 @@
         </article>
 
         <article class="crepe" data-cat="sweet" data-reveal>
-          <div class="crepe-top"><h3>Caramelized Banana</h3><span class="tag sweet">Sweet</span></div>
-          <p class="ing">Caramelized bananas, Nutella, caramel sauce &amp; chantilly cream.</p>
-          <div class="base">Sweet crêpe</div>
-        </article>
-
-        <article class="crepe" data-cat="sweet" data-reveal>
           <div class="crepe-top"><h3>Elvis</h3><span class="tag sweet">Sweet</span></div>
           <p class="ing">Banana, peanut butter sauce, Nutella &amp; Fruity Pebbles.</p>
           <div class="base">Sweet crêpe</div>
         </article>
 
-        <article class="crepe" data-cat="savory" data-reveal>
-          <div class="crepe-top"><h3>Lox</h3><span class="tag savory">Savory</span></div>
-          <p class="ing">Whipped cream cheese, cold-smoked salmon, dill-lemon crème fraîche &amp; red onion.</p>
-          <div class="base">Plain crêpe</div>
+        <article class="crepe" data-cat="sweet" data-reveal>
+          <div class="crepe-top"><h3>Horchata Dorada</h3><span class="tag new">New</span><span class="tag sweet">Sweet</span></div>
+          <p class="ing">Cinnamon rice cream, cajeta drizzle &amp; candied pecans. Horchata, folded.</p>
+          <div class="base">Sweet crêpe</div>
         </article>
 
-        <article class="crepe" data-cat="savory" data-reveal>
-          <div class="crepe-top"><h3>Ham &amp; Egg</h3><span class="tag savory">Savory</span></div>
-          <p class="ing">Jambon de Paris, gruyère or swiss &amp; a nest egg. The French classic.</p>
+        <!-- SAVORY -->
+        <article class="crepe signature" data-cat="savory signature" data-reveal>
+          <div class="star"><svg class="poppy-accent" aria-hidden="true"><use href="#poppy"/></svg>Signature</div>
+          <div class="crepe-top"><h3>Funeral Potatoes</h3><span class="tag new">New</span><span class="tag savory">Savory</span><span class="tag veg">Veg</span></div>
+          <p class="ing">Crisped hashbrown, sharp cheddar cream, cornflake crunch, scallion &amp; fry sauce. Yes, we&rsquo;re serious.</p>
           <div class="base">Plain crêpe</div>
         </article>
 
@@ -428,14 +442,8 @@
         </article>
 
         <article class="crepe" data-cat="savory" data-reveal>
-          <div class="crepe-top"><h3>Purple Pig</h3><span class="tag savory">Savory</span></div>
-          <p class="ing">Smoked pulled pork, purple cabbage &amp; crisp apples.</p>
-          <div class="base">Ube / taro crêpe</div>
-        </article>
-
-        <article class="crepe" data-cat="savory" data-reveal>
-          <div class="crepe-top"><h3>Vegetarian</h3><span class="tag savory">Savory</span></div>
-          <p class="ing">Cream cheese, mushroom, spinach &amp; gruyère.</p>
+          <div class="crepe-top"><h3>Ham &amp; Egg</h3><span class="tag savory">Savory</span></div>
+          <p class="ing">Jambon de Paris, gruyère or swiss &amp; a nest egg. The French classic.</p>
           <div class="base">Plain crêpe</div>
         </article>
 
@@ -744,7 +752,7 @@
     filters.forEach(b=>b.setAttribute('aria-pressed','false'));
     btn.setAttribute('aria-pressed','true');
     const f=btn.dataset.filter;
-    crepes.forEach(c=>c.classList.toggle('hide', f!=='all' && c.dataset.cat!==f));
+    crepes.forEach(c=>c.classList.toggle('hide', f!=='all' && !c.dataset.cat.split(' ').includes(f)));
   }));
 
   // create-your-own builder
