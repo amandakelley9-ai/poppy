@@ -17,6 +17,15 @@ export type MenuItem = {
   /** Path under /public/images/crepes, or null for a labeled placeholder. */
   image: string | null;
   imageAlt: string;
+  /**
+   * CSS object-position for the photo, e.g. "center 70%".
+   *
+   * These are tall 3:4 photos shown in wide 4:3 and square containers, so
+   * object-cover always crops the top and bottom. Raise the percentage to
+   * slide the visible window further down the photo, lower it to move up.
+   * Omit for centred, which suits most plates.
+   */
+  focal?: string;
   tags: DietaryTag[];
   /** Marks the hero item in the Home page menu preview. */
   hero?: boolean;
@@ -70,6 +79,7 @@ export const signatureCrepes: MenuItem[] = [
     image: null,
     imageAlt:
       "The frenchie on a pale plate — a folded savory crêpe with ham and gruyère, a nested fried egg with a runny yolk on top, dijon dressing, lemon slices and fresh cilantro",
+    focal: "center 68%",
     tags: [],
     savory: true,
   },

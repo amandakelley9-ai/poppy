@@ -21,6 +21,7 @@ function Item({ item }: { item: MenuItem }) {
           alt={item.imageAlt}
           fill
           sizes="(max-width: 640px) 100vw, 200px"
+          style={item.focal ? { objectPosition: item.focal } : undefined}
           className="object-cover"
         />
       </div>

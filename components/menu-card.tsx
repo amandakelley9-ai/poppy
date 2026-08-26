@@ -19,6 +19,7 @@ export function MenuCard({ item, size = "default" }: { item: MenuItem; size?: "d
           alt={item.imageAlt}
           fill
           sizes={hero ? "(max-width: 640px) 100vw, 600px" : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"}
+          style={item.focal ? { objectPosition: item.focal } : undefined}
           className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
         />
       </div>
