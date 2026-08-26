@@ -144,8 +144,9 @@
   .crepe.hide{display:none}
   .crepe.signature{background:var(--red);color:var(--cream);box-shadow:6px 6px 0 var(--red-deep)}
   .crepe.signature:hover{box-shadow:3px 3px 0 var(--red-deep)}
-  .crepe-top{display:flex;align-items:flex-start;justify-content:space-between;gap:.6rem;margin-bottom:.5rem;flex-wrap:wrap}
-  .crepe h3{font-weight:700;font-size:1.28rem;line-height:1.1;letter-spacing:-.01em}
+  .crepe-top{display:flex;align-items:flex-start;gap:.6rem;margin-bottom:.5rem;flex-wrap:wrap}
+  .crepe h3{font-weight:700;font-size:1.28rem;line-height:1.1;letter-spacing:-.01em;margin-right:auto}
+  .crepe-top:has(.tag:nth-of-type(2)) h3{flex:1 1 100%}
   .tag{flex:none;font-weight:700;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
     padding:.28rem .6rem;border-radius:999px;border:2.5px solid var(--ink)}
   .tag.sweet,.tag.veg{background:var(--cream);color:var(--ink)}
