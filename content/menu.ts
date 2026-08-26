@@ -79,7 +79,9 @@ export const signatureCrepes: MenuItem[] = [
     image: null,
     imageAlt:
       "The frenchie on a pale plate — a folded savory crêpe with ham and gruyère, a nested fried egg with a runny yolk on top, dijon dressing, lemon slices and fresh cilantro",
-    focal: "center 68%",
+    // Centres the egg. Its midpoint sits at 41% of the image height; the 4:3
+    // card wants 30% and the square thumbnail 16%, so 24% splits them.
+    focal: "center 24%",
     tags: [],
     savory: true,
   },
