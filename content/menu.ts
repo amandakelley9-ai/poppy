@@ -68,7 +68,8 @@ export const signatureCrepes: MenuItem[] = [
     description: "ham, gruyère cheese, dijon dressing, optional nested egg",
     price: "[[ $ ]]",
     image: null,
-    imageAlt: "The frenchie — savory crêpe with ham, gruyère and dijon dressing",
+    imageAlt:
+      "The frenchie on a pale plate — a folded savory crêpe with ham and gruyère, a nested fried egg with a runny yolk on top, dijon dressing, lemon slices and fresh cilantro",
     tags: [],
     savory: true,
   },
