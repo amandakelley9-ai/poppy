@@ -43,11 +43,11 @@ export const signatureCrepes: MenuItem[] = [
     name: "poppy crêpe",
     slug: "poppy-crepe",
     description:
-      "lemon cheesecake filling, raspberry compote, fresh raspberries, dark chocolate drizzle, powdered sugar",
+      "red velvet poppyseed crêpe, lemon cheesecake filling, raspberry compote, fresh raspberries, dark chocolate drizzle, powdered sugar",
     price: "[[ $ ]]",
     image: null,
     imageAlt:
-      "The poppy crêpe on a pale plate — a deep red folded crêpe layered with lemon cheesecake cream and raspberry compote, topped with fresh raspberries, candied lemon slices, dark chocolate drizzle and raspberry powder",
+      "The poppy crêpe on a pale plate — a folded red velvet poppyseed crêpe layered with lemon cheesecake cream and raspberry compote, topped with fresh raspberries, candied lemon slices, dark chocolate drizzle and raspberry powder",
     tags: ["V"],
     hero: true,
   },
