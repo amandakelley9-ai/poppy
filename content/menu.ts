@@ -59,7 +59,7 @@ export const signatureCrepes: MenuItem[] = [
     price: "[[ $ ]]",
     image: null,
     imageAlt:
-      "Nutella and fruit crêpe with strawberries, banana and chantilly cream",
+      "The nutella + fruit crêpe on a pale plate — folded sweet crêpe with nutella and sliced strawberries, topped with a swirl of chantilly cream, chocolate syrup and powdered sugar",
     tags: ["V"],
   },
   {
