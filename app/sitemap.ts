@@ -1,6 +1,9 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/content/site";
 
+// Emitted as a static file at build time (required by `output: "export"`).
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     { path: "", priority: 1.0, changeFrequency: "weekly" as const },

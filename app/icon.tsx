@@ -4,6 +4,9 @@ import { POPPY_TRANSFORM, POPPY_SILHOUETTE, POPPY_DARK, POPPY_LIGHT } from "@/co
 export const size = { width: 64, height: 64 };
 export const contentType = "image/png";
 
+// Rendered once at build time (required by `output: "export"`).
+export const dynamic = "force-static";
+
 /** Favicon: the traced poppy bloom on the brand cream. */
 export default function Icon() {
   return new ImageResponse(

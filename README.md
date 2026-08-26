@@ -4,8 +4,8 @@ Marketing site for **Poppy Crêpes — Crêperie & Café**, a mobile crêpe trai
 catering business. Built to convert visitors into event booking inquiries.
 
 - **Live domain:** https://poppycrepes.com
-- **Stack:** Next.js 16 (App Router) · TypeScript · Tailwind CSS v4 · Resend
-- **Deploy target:** Vercel
+- **Stack:** Next.js 16 (App Router) · TypeScript · Tailwind CSS v4
+- **Hosting:** GitHub Pages, as a static export, deployed by GitHub Actions
 
 ---
 
@@ -26,22 +26,23 @@ npx tsc --noEmit   # typecheck
 npx eslint .       # lint
 ```
 
-**The booking form works with no configuration.** Without `RESEND_API_KEY`, the
-API route prints the formatted inquiry to your terminal instead of emailing it,
-so you can test the whole flow before setting up an email account.
+`npm run build` writes a fully static site to `out/`. There is no server —
+see **Hosting** below for what that means.
 
 ---
 
 ## Project structure
 
 ```
+.github/workflows/      Build + deploy to GitHub Pages
 app/                    Routes. One folder per page.
-  api/booking/route.ts  Booking endpoint — validation, spam checks, email
   icon.tsx              Favicon, generated from the poppy motif
   opengraph-image.tsx   Social share card
 components/             UI. `poppy.tsx` holds the motif.
 content/                *** Everything editable lives here ***
-lib/                    Schema, email templates, rate limiting
+lib/booking-schema.ts   Form validation rules, shared by every field
+public/CNAME            Custom domain — must stay in public/
+public/.nojekyll        Stops Jekyll eating _next/ — must stay in public/
 public/images/          Photography, organised by subject
 scripts/                Placeholder image generator
 legacy/index.html       The previous static site, kept for reference
@@ -53,7 +54,7 @@ You should rarely need to touch JSX. All copy and data live in `content/`:
 
 | File | What it controls |
 |---|---|
-| `site.ts` | Contact details, social links, service area, pricing, response time |
+| `site.ts` | Contact details, social links, service area, pricing, response time, **form access key** |
 | `menu.ts` | Every menu item, description, price and dietary tag |
 | `holiday.ts` | The Holiday & Winter Events band (see below) |
 | `events.ts` | Event types, service cards, what's included, form dropdowns |
@@ -89,68 +90,78 @@ bookingDeadline: "2026-11-15" // set to null to omit the deadline sentence
 
 ---
 
-## Setting up Resend
+## Hosting
 
-The form works without this. Do it when you're ready to receive real inquiries.
+The site is a **static export** served by **GitHub Pages**. `next.config.ts`
+sets `output: "export"`, so `npm run build` prerenders every page to `out/`.
 
-1. **Create a free account** at [resend.com](https://resend.com). The free tier
-   covers 3,000 emails/month, far more than a booking form needs.
+Two consequences:
 
-2. **Verify your domain.** In the Resend dashboard go to **Domains → Add Domain**
-   and enter `poppycrepes.com`. Resend gives you DNS records — typically a `TXT`
-   for DKIM and an `MX` plus `TXT` for the return path. Add them wherever
-   `poppycrepes.com` DNS is managed. Verification usually completes in minutes.
+- **No API routes.** There is no server to run them. The booking form posts
+  straight to a form service instead (below).
+- **No `next/image` optimisation.** It needs a server, so it's disabled.
+  Resize and compress photos yourself before adding them — see the dimensions
+  table below.
 
-   > You must verify the domain. Resend will reject sends from a `from` address
-   > on an unverified domain, and the auto-reply to customers will fail.
+### Deploying
 
-3. **Create an API key** under **API Keys → Create API Key**. Give it *Sending
-   access*. Copy it — it's shown only once.
+`.github/workflows/deploy.yml` builds and publishes on every push to `main`.
 
-4. **Add the environment variables.** Locally, put them in `.env.local`. On
-   Vercel, go to **Project → Settings → Environment Variables** and add all
-   three to Production (and Preview if you want the form live there):
+> **One-time setup:** in **Settings → Pages**, set **Source** to
+> **GitHub Actions**. If it's left on "Deploy from a branch", the workflow's
+> output is ignored and Pages serves the repo root instead — which renders this
+> README as the homepage.
 
-   | Variable | Example |
-   |---|---|
-   | `RESEND_API_KEY` | `re_xxxxxxxxxxxx` |
-   | `BOOKING_TO_EMAIL` | `catering@poppycrepes.com` |
-   | `BOOKING_FROM_EMAIL` | `bookings@poppycrepes.com` |
+`public/CNAME` holds the custom domain and `public/.nojekyll` stops Jekyll from
+eating the `_next/` folder. Both must stay in `public/` so they end up inside
+`out/`. Deleting either breaks the live site.
 
-   `BOOKING_FROM_EMAIL` must be on the domain you verified in step 2.
-   `BOOKING_TO_EMAIL` can be any address you can read.
-
-5. **Redeploy** so the new variables are picked up, then send yourself a test
-   inquiry through `/book`.
-
-You'll receive the inquiry with `replyTo` set to the customer's address, so
-hitting reply reaches them directly. The customer gets a branded confirmation.
+Check progress under the repo's **Actions** tab. A deploy takes about two
+minutes.
 
 ---
 
-## Deploying to Vercel
+## Connecting the booking form
 
-1. Push this repo to GitHub.
-2. At [vercel.com/new](https://vercel.com/new), import the repo. Vercel detects
-   Next.js — the defaults are correct.
-3. Add the three environment variables above before the first deploy.
-4. Deploy.
+The form validates in the browser with zod, then POSTs to a form service that
+emails you the inquiry. Default is [Web3Forms](https://web3forms.com) — free for
+250 submissions a month.
 
-### Moving the domain off GitHub Pages
+1. Go to [web3forms.com](https://web3forms.com) and enter the address where you
+   want inquiries delivered.
+2. They email you an **access key**. Paste it into `site.form.accessKey` in
+   `content/site.ts`.
+3. Commit and push. That's the whole setup — no account, and the key is safe to
+   commit publicly because it only ever routes mail to the address you verified.
 
-`poppycrepes.com` currently points at GitHub Pages, which serves static files
-only and **cannot run the booking API**. To cut over:
+Until the key is set, the form tells visitors to email you directly rather than
+failing silently.
 
-1. Deploy to Vercel and confirm the site works on its `*.vercel.app` URL.
-2. In **Vercel → Project → Settings → Domains**, add `poppycrepes.com` and
-   `www.poppycrepes.com`. Vercel shows the DNS records it needs.
-3. At your DNS provider, replace the GitHub Pages records (the `A` records
-   pointing at `185.199.10x.x`, and any `CNAME` to `*.github.io`) with Vercel's.
-4. Wait for DNS to propagate, then confirm HTTPS is issued in Vercel.
-5. Once live, delete the `CNAME` file from this repo and turn off GitHub Pages
-   in the repo settings, so the two can't fight over the domain.
+To use a different service (Formspree, Basin, Getform all work the same way),
+change `site.form.endpoint` and check which field name it expects for the key.
 
-The old static site is preserved at `legacy/index.html` for reference.
+### What the static setup costs you
+
+Worth knowing, since the form is the site's main job:
+
+| | Status |
+|---|---|
+| Client-side validation | Works — zod, inline field errors |
+| Honeypot + timing trap | Works, but client-side only, so weaker |
+| **Server-side validation** | **Gone.** No server. The form service is the only gatekeeper. |
+| **Branded customer auto-reply** | **Gone.** Visitors get the on-page confirmation instead of an email. Some services offer an autoresponder on paid plans — check yours. |
+| Reply-to the customer | Works — the `email` field sets it automatically |
+
+If you ever move to a host that runs server code (Cloudflare Pages, Netlify and
+Vercel all have free tiers), the full Resend integration — server-side
+validation, rate limiting, and the branded auto-reply — is recoverable from git:
+
+```bash
+git checkout d640c10 -- app/api lib/emails.tsx lib/rate-limit.ts
+```
+
+Then drop `output: "export"` from `next.config.ts` and set `RESEND_API_KEY`,
+`BOOKING_TO_EMAIL` and `BOOKING_FROM_EMAIL`.
 
 ---
 

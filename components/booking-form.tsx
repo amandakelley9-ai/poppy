@@ -3,12 +3,42 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Loader2 } from "lucide-react";
-import { bookingSchema, todayISO } from "@/lib/booking-schema";
+import { bookingSchema, todayISO, MIN_FILL_MS, type BookingData } from "@/lib/booking-schema";
 import { bookingEventTypes, serviceStyles } from "@/content/events";
 import { site } from "@/content/site";
 import { PoppyBloom } from "./poppy";
 
 type Errors = Partial<Record<string, string>>;
+
+/**
+ * Flattens the validated form into the shape the form service posts on.
+ *
+ * Labels are spelled out because these land in an email as-is — `venueName`
+ * reads badly in an inbox, "Venue" doesn't. `email` is named exactly that so
+ * the service sets reply-to from it automatically.
+ */
+function submissionBody(d: BookingData) {
+  const location = [d.venueName, d.city, d.zip].filter(Boolean).join(", ");
+  return {
+    access_key: site.form.accessKey,
+    subject: `New Event Inquiry — ${d.eventType} — ${d.eventDate} — ${d.name}`,
+    from_name: d.name,
+    email: d.email,
+    Name: d.name,
+    Phone: d.phone,
+    "Event type": d.eventType,
+    "Event date": d.eventDate,
+    "Start time": d.startTime || "—",
+    "Service duration": d.duration || "—",
+    Location: location || "—",
+    "Guest count": String(d.guestCount),
+    "Service style": d.serviceStyles.join(", ") || "—",
+    "Indoor / outdoor": d.setting ?? "—",
+    "Budget range": d.budget || "—",
+    "Heard about us": d.referral || "—",
+    Details: d.details || "—",
+  };
+}
 
 /** Field-level error text, tied to its input via aria-describedby. */
 function FieldError({ id, message }: { id: string; message?: string }) {
@@ -90,21 +120,43 @@ export function BookingForm() {
       return;
     }
 
+    // Spam checks. On a static host these run here rather than on a server, so
+    // they only stop unsophisticated bots — the form service does the heavier
+    // filtering on its end. Both report success so a bot learns nothing.
+    if (payload.company) {
+      setStatus("sent");
+      return;
+    }
+    if (Date.now() - startedAt.current < MIN_FILL_MS) {
+      setStatus("sent");
+      return;
+    }
+
+    if (!site.form.accessKey) {
+      setFormError(
+        `This form isn't connected yet — please email us at ${site.cateringEmail} and we'll get straight back to you.`,
+      );
+      requestAnimationFrame(() => errorSummary.current?.focus());
+      return;
+    }
+
     setErrors({});
     setFormError(null);
     setStatus("sending");
 
     try {
-      const response = await fetch("/api/booking", {
+      const response = await fetch(site.form.endpoint, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(submissionBody(parsed.data)),
       });
       const body = await response.json().catch(() => ({}));
 
-      if (!response.ok) {
-        setErrors(body.fieldErrors ?? {});
-        setFormError(body.error ?? "Something went wrong. Please try again.");
+      if (!response.ok || body.success === false) {
+        setFormError(
+          body.message ??
+            `We couldn't send that just now. Please email us at ${site.cateringEmail}.`,
+        );
         setStatus("idle");
         requestAnimationFrame(() => errorSummary.current?.focus());
         return;

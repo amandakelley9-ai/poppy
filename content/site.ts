@@ -41,6 +41,29 @@ export const site = {
   },
 
   /**
+   * The booking form posts here.
+   *
+   * The site is statically hosted on GitHub Pages, so there is no server to
+   * receive the form — a form service takes the submission and emails it to
+   * you. Default is Web3Forms (free, 250 submissions/month).
+   *
+   * SETUP: go to https://web3forms.com, enter the address you want inquiries
+   * delivered to, and paste the access key it emails you below. That is the
+   * whole setup — no account, and the key is safe to commit (it only ever
+   * routes mail to the address you verified).
+   *
+   * To use a different service, change `endpoint` and check what field name it
+   * expects for the key. Formspree, Basin and Getform all take a plain POST
+   * the same way.
+   */
+  form: {
+    endpoint: "https://api.web3forms.com/submit",
+    // TODO: paste your Web3Forms access key here. Until this is set, the form
+    // tells visitors to email instead of failing silently.
+    accessKey: "",
+  },
+
+  /**
    * Shown on /catering as the pricing signal. The legacy site published real
    * per-guest package pricing ($14 / $17 / $28, 25-guest minimum, $500 event
    * minimum) — those numbers are carried here but should be re-confirmed
