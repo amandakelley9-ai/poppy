@@ -184,7 +184,8 @@ matching the plated crêpes on the menu board.
 
 | Path | Dimensions | What it is |
 |---|---|---|
-| `images/crepes/hero.jpg` | 2400 × 1600 | Home hero. Trailer or crêpe, wide. Type sits bottom-left, so keep that area uncluttered. |
+| `images/crepes/hero.jpg` | 1440 × 2560 | **Home hero poster.** Generated as the first frame of `videos/hero.mp4` — regenerate it alongside the video so the two match, or the hero visibly jumps when playback starts. |
+| `videos/hero.mp4` | 720 × 1280 | **Home hero background video.** See "The hero video" below. |
 | `images/crepes/poppy-crepe.jpg` | 1600 × 1200 | poppy crêpe — the hero item |
 | `images/crepes/nutella-fruit.jpg` | 1600 × 1200 | nutella + fruit |
 | `images/crepes/frenchie.jpg` | 1600 × 1200 | frenchie |
@@ -209,6 +210,46 @@ matching the plated crêpes on the menu board.
 | `images/events/festivals.jpg` | 1200 × 900 | Event grid |
 
 Logos in `images/logo/` are the real brand files and shouldn't be replaced.
+
+---
+
+## The hero video
+
+`public/videos/hero.mp4` plays muted and looping behind the home hero, under
+the burgundy scrim.
+
+The source is portrait phone footage (`rotation=-90` in the original), so it's
+720 × 1280. That works in its favour on mobile, where it fills the tall hero;
+on desktop `object-cover` crops it to a horizontal band, which reads as an
+intentional food close-up.
+
+`components/hero-video.tsx` deliberately does **not** load the video until
+after the page's `load` event, and skips it entirely for visitors who have
+`prefers-reduced-motion` set or Data Saver turned on. Those visitors keep the
+poster frame, which is the video's own first frame, so nothing looks missing.
+
+### Replacing it
+
+Strip the audio and compress — never drop a phone file in directly, they're
+typically 10× too big:
+
+```bash
+ffmpeg -i "source.mp4" -an -c:v libx264 -profile:v high -pix_fmt yuv420p \
+  -crf 33 -preset slow -movflags +faststart public/videos/hero.mp4
+
+# poster must be the video's first frame, or the hero jumps on play
+ffmpeg -ss 0 -i "source.mp4" -frames:v 1 -vf "scale=1440:-2" -q:v 12 \
+  public/images/crepes/hero.jpg
+```
+
+`-an` strips audio. `-movflags +faststart` puts the index at the front so it
+streams rather than waiting for a full download. CRF 33 is deliberate — the
+scrim hides the difference from CRF 30 and saves a third of the file.
+
+**On length:** the current file is the full 2m27s clip at 7.3 MB. A 30-second
+excerpt encodes to about 1.4 MB and, because the footage is one continuous slow
+pan, looks identical as a background. Most visitors never watch long enough to
+see it loop. To switch, add `-ss 8 -t 30` to the command above.
 
 ---
 

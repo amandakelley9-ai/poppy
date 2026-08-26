@@ -1,25 +1,18 @@
-import Image from "next/image";
 import { Container, Button } from "./ui";
+import { HeroVideo } from "./hero-video";
 import { site } from "@/content/site";
 
 /**
- * Home hero. Full-bleed photo under a burgundy-to-transparent scrim, with the
+ * Home hero. Full-bleed video under a burgundy-to-transparent scrim, with the
  * headline set lowercase and large to echo the wordmark.
  *
- * The scrim runs bottom-heavy so type sits on the darkest part of the image
- * regardless of what the final photograph looks like.
+ * The scrim runs bottom-heavy so type sits on the darkest part of the frame no
+ * matter what the video is showing at that moment.
  */
 export function Hero() {
   return (
-    <section className="on-burgundy relative isolate flex min-h-[clamp(560px,82svh,860px)] items-end overflow-hidden">
-      <Image
-        src="/images/crepes/hero.jpg"
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className="-z-20 object-cover"
-      />
+    <section className="on-burgundy relative isolate flex min-h-[clamp(560px,82svh,860px)] items-end overflow-hidden bg-burgundy">
+      <HeroVideo className="absolute inset-0 -z-20 size-full object-cover" />
       <div
         aria-hidden
         className="absolute inset-0 -z-10 bg-gradient-to-t from-burgundy via-burgundy/85 to-burgundy/40"

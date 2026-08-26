@@ -26,10 +26,10 @@ export function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr_1fr]">
           <div>
             <Image
-              src="/images/logo/logo-horizontal-cream.png"
+              src="/images/logo/logo-horizontal-nav-cream.png"
               alt="Poppy Crêpes"
-              width={220}
-              height={84}
+              width={256}
+              height={96}
               className="h-11 w-auto"
             />
             <p className="mt-5 text-lg text-cream/90">{site.tagline}</p>

@@ -32,10 +32,10 @@ export function Header() {
         <div className="flex h-[72px] items-center justify-between gap-4">
           <Link href="/" className="flex min-h-[44px] shrink-0 items-center" aria-label="Poppy Crêpes — home">
             <Image
-              src="/images/logo/logo-horizontal.png"
+              src="/images/logo/logo-horizontal-nav.png"
               alt="Poppy Crêpes"
-              width={200}
-              height={76}
+              width={257}
+              height={96}
               priority
               className="h-9 w-auto sm:h-10"
             />

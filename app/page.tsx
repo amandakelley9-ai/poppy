@@ -27,10 +27,10 @@ export default function HomePage() {
         <Container>
           <Reveal className="mx-auto max-w-3xl text-center">
             <Image
-              src="/images/logo/logo-horizontal.png"
+              src="/images/logo/logo-horizontal-lg.png"
               alt="Poppy Crêpes"
-              width={280}
-              height={107}
+              width={428}
+              height={160}
               className="mx-auto h-14 w-auto sm:h-16"
             />
             <p className="mt-8 text-xl leading-relaxed sm:text-2xl">
