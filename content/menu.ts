@@ -55,7 +55,7 @@ export const signatureCrepes: MenuItem[] = [
     name: "nutella + fruit",
     slug: "nutella-fruit",
     description:
-      "sweet crepe, strawberries, banana, chantilly cream, chocolate syrup, powdered sugar",
+      "sweet crepe, strawberries, optional banana, chantilly cream, chocolate syrup, powdered sugar",
     price: "[[ $ ]]",
     image: null,
     imageAlt:
