@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { HeroVideo } from "@/components/hero-video";
 import { Check } from "lucide-react";
 import { Container, Section, SectionHeading, Eyebrow } from "@/components/ui";
 import { Reveal } from "@/components/reveal";
@@ -17,15 +18,16 @@ export const metadata: Metadata = {
 export default function CateringPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="on-burgundy relative isolate flex min-h-[clamp(420px,58svh,600px)] items-end overflow-hidden">
-        <Image
-          src="/images/catering/hero.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="-z-20 object-cover"
+      {/*
+        Taller than the old image hero: the background video is portrait
+        (1080x1920), so a short wide band cropped it to an unreadable sliver.
+        At this height enough of the plate reads.
+      */}
+      <section className="on-burgundy relative isolate flex min-h-[clamp(480px,70svh,780px)] items-end overflow-hidden bg-burgundy">
+        <HeroVideo
+          src="/videos/catering-hero.mp4"
+          poster="/images/catering/hero.jpg"
+          className="absolute inset-0 -z-20 size-full object-cover"
         />
         <div
           aria-hidden

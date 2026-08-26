@@ -12,7 +12,11 @@ import { site } from "@/content/site";
 export function Hero() {
   return (
     <section className="on-burgundy relative isolate flex min-h-[clamp(560px,82svh,860px)] items-end overflow-hidden bg-burgundy">
-      <HeroVideo className="absolute inset-0 -z-20 size-full object-cover" />
+      <HeroVideo
+        src="/videos/hero.mp4"
+        poster="/images/crepes/hero.jpg"
+        className="absolute inset-0 -z-20 size-full object-cover"
+      />
       <div
         aria-hidden
         className="absolute inset-0 -z-10 bg-gradient-to-t from-burgundy via-burgundy/85 to-burgundy/40"

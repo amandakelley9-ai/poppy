@@ -3,11 +3,11 @@
 import { useEffect, useRef } from "react";
 
 /**
- * Background video for the home hero.
+ * Background video for a page hero.
  *
  * The poster paints immediately and is what the browser measures as the LCP
- * element. The 7 MB video is deliberately not attached until after the page
- * has finished loading — fetching it eagerly competes with the poster for
+ * element. The video is deliberately not attached until after the page has
+ * finished loading — fetching it eagerly competes with the poster for
  * bandwidth and pushed mobile LCP past 10s.
  *
  * It is also skipped entirely for visitors who have asked for reduced motion
@@ -21,7 +21,17 @@ import { useEffect, useRef } from "react";
  * Muted + playsInline are what allow autoplay at all; browsers block anything
  * with sound. The file has no audio track regardless.
  */
-export function HeroVideo({ className }: { className?: string }) {
+export function HeroVideo({
+  src,
+  poster,
+  className,
+}: {
+  /** Path under /public/videos. */
+  src: string;
+  /** Should be the video's own first frame, or the hero jumps on play. */
+  poster: string;
+  className?: string;
+}) {
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -34,12 +44,13 @@ export function HeroVideo({ className }: { className?: string }) {
     ).connection;
     if (reduceMotion || connection?.saveData === true) return;
 
+
     let idleHandle: number | undefined;
 
     const start = () => {
       // Yield once more so the browser has settled before a large fetch.
       idleHandle = window.setTimeout(() => {
-        video.src = "/videos/hero.mp4";
+        video.src = src;
         // Autoplay can still be refused — low power mode, for one. The poster
         // stays up if it is, so a rejected promise needs nothing but silence.
         video.play().catch(() => {});
@@ -56,13 +67,13 @@ export function HeroVideo({ className }: { className?: string }) {
       window.removeEventListener("load", start);
       window.clearTimeout(idleHandle);
     };
-  }, []);
+  }, [src]);
 
   return (
     <video
       ref={ref}
       className={className}
-      poster="/images/crepes/hero.jpg"
+      poster={poster}
       autoPlay
       muted
       loop
