@@ -175,6 +175,19 @@ code change needed.** To regenerate any missing placeholders:
 python3 scripts/generate-placeholders.py   # never overwrites a real photo
 ```
 
+> **Size photos before adding them.** `next/image` optimisation is off (it
+> needs a server), so whatever you commit is what visitors download. A phone
+> photo is typically 3000 × 4000 and 6 MB; aim for the dimensions in the table
+> below at roughly 250–450 KB:
+>
+> ```bash
+> python3 -c "
+> from PIL import Image, ImageOps
+> im = ImageOps.exif_transpose(Image.open('source.jpg')).convert('RGB')
+> im.resize((1000, 1333), Image.Resampling.LANCZOS).save(
+>     'public/images/crepes/NAME.jpg', quality=78, optimize=True, progressive=True)"
+> ```
+
 ### House style
 
 Overhead or three-quarter, bright, generous portions, on a light surface —
@@ -186,7 +199,7 @@ matching the plated crêpes on the menu board.
 |---|---|---|
 | `images/crepes/hero.jpg` | 1440 × 2560 | **Home hero poster.** Generated as the first frame of `videos/hero.mp4` — regenerate it alongside the video so the two match, or the hero visibly jumps when playback starts. |
 | `videos/hero.mp4` | 720 × 1280 | **Home hero background video.** See "The hero video" below. |
-| `images/crepes/poppy-crepe.jpg` | 1600 × 1200 | poppy crêpe — the hero item |
+| `images/crepes/poppy-crepe.jpg` | 1000 × 1333 | **Real photo.** poppy crêpe — the hero item. Portrait 3:4; the containers crop it to 4:3 and square via `object-cover`, so keep the plate centred in any replacement. |
 | `images/crepes/nutella-fruit.jpg` | 1600 × 1200 | nutella + fruit |
 | `images/crepes/frenchie.jpg` | 1600 × 1200 | frenchie |
 | `images/crepes/veggie.jpg` | 1600 × 1200 | veggie |

@@ -47,7 +47,7 @@ export const signatureCrepes: MenuItem[] = [
     price: "[[ $ ]]",
     image: null,
     imageAlt:
-      "The poppy crêpe — folded crêpe with lemon cheesecake filling, raspberry compote and fresh raspberries, finished with dark chocolate and powdered sugar",
+      "The poppy crêpe on a pale plate — a deep red folded crêpe layered with lemon cheesecake cream and raspberry compote, topped with fresh raspberries, candied lemon slices, dark chocolate drizzle and raspberry powder",
     tags: ["V"],
     hero: true,
   },
