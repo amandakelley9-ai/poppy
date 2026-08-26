@@ -90,7 +90,8 @@ export const signatureCrepes: MenuItem[] = [
     price: "[[ $ ]]",
     image: null,
     imageAlt:
-      "Veggie crêpe with swiss cheese, spinach, cranberry and feta, finished with balsamic glaze",
+      "The veggie crêpe on a pale plate — a folded crêpe over swiss cheese and fresh spinach, scattered with crumbled feta, walnuts and dried cranberries, finished with balsamic glaze and a lemon slice",
+    focal: "center 60%",
     tags: ["V"],
     savory: true,
   },
