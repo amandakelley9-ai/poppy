@@ -104,7 +104,8 @@ export const kidsCrepes: MenuItem[] = [
     description: "peanut butter and jam, folded simple",
     price: "[[ $ ]]",
     image: null,
-    imageAlt: "Kids peanut butter and jam crêpe",
+    imageAlt:
+      "The kids pb&j crêpe on a pale plate — a folded crêpe spread with peanut butter and strawberry jam, with two whole strawberries alongside",
     tags: ["V"],
   },
   {
@@ -113,7 +114,9 @@ export const kidsCrepes: MenuItem[] = [
     description: "nutella, nothing else, exactly as requested",
     price: "[[ $ ]]",
     image: null,
-    imageAlt: "Kids crêpe with nutella only",
+    imageAlt:
+      "The kids just nutella crêpe on a pale plate — a folded crêpe spread with nutella, finished with chocolate drizzle and powdered sugar",
+    focal: "center 62%",
     tags: ["V"],
   },
 ];
