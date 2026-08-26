@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   POPPY CRÊPES — brand tokens
+   Palette per the brand spec. Cream is the base surface; pure white never
+   appears as a large field.
+
+   NOTE ON `--color-poppy`: the spec lists #e31218 and calls it "the logo red".
+   Sampling the actual logo PNGs gives #ed1b24 (upper petals) and #d61a21
+   (lower petals) — #e31218 is in neither. The spec value is used here as
+   written; to snap the site to the measured logo red instead, change the one
+   line below to #ed1b24. See README "Known discrepancies".
+--------------------------------------------------------------------------- */
+@theme {
+  --color-cream:      #fdf8f3;  /* default page background */
+  --color-cream-deep: #f9efe3;  /* alternating bands, cards, logo field */
+  --color-poppy:      #e31218;  /* primary accent — CTAs, motif, hovers */
+  --color-burgundy:   #700a06;  /* dark surfaces — footer, holiday band, scrims */
+  --color-ink:        #000000;  /* headlines and body copy */
+  --color-gold:       #c9a06a;  /* eyebrows, hairlines, decorative frames */
+  --color-hairline:   #e3d6c6;  /* borders and input outlines */
+
+  /* logo-accurate reds, for the motif only (matches the supplied artwork) */
+  --color-petal-light: #ed1b24;
+  --color-petal-dark:  #d61a21;
+
+  --font-display: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-sans:    var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-brand: 10px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Headlines echo the wordmark: lowercase, tight, slightly negative tracking. */
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    text-transform: lowercase;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  h1 { line-height: 0.98; letter-spacing: -0.03em; }
+
+  p { text-wrap: pretty; }
+
+  :focus-visible {
+    outline: 3px solid var(--color-poppy);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* On burgundy fields the focus ring flips to cream so it stays visible. */
+  .on-burgundy :focus-visible {
+    outline-color: var(--color-cream);
+  }
+}
+
+@layer utilities {
+  /* Fade-and-rise on scroll, ~400ms. Elements start hidden only when motion
+     is allowed — otherwise they render in place, no observer needed. */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 400ms ease-out, transform 400ms ease-out;
+    }
+    .reveal[data-revealed="true"] {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* If JavaScript never runs, the observer never fires — so make sure the
+     content is visible rather than stuck at opacity 0. */
+  .no-js .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
