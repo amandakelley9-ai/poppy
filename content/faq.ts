@@ -10,7 +10,7 @@ export const faqs: { q: string; a: string }[] = [
   },
   {
     q: "Do you charge travel fees?",
-    a: `Events within ${"[[ RADIUS ]]"} miles of ${"[[ HOME BASE ]]"} have no travel fee. Beyond that we add a per-mile rate — we'll quote it up front, never after the fact.`,
+    a: "Events anywhere in Salt Lake or Utah County have no travel fee. Outside those two counties we add a per-mile rate — we'll quote it up front, never after the fact.",
   },
   {
     q: "Can you serve indoors?",

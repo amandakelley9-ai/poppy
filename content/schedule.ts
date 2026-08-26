@@ -24,7 +24,7 @@ export const upcoming: ScheduleEntry[] = [
     endTime: "1:00pm",
     venue: "[[ FARMERS MARKET ]]",
     address: "[[ STREET ADDRESS ]]",
-    city: "Alpine, UT",
+    city: "[[ CITY ]], UT",
     note: "Weekly through October",
   },
   {

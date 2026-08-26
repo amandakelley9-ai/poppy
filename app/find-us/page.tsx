@@ -8,7 +8,7 @@ import { site } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Find Us",
-  description: `Upcoming dates and locations for the Poppy Crêpes trailer around ${site.serviceArea}.`,
+  description: `Upcoming dates and locations for the Poppy Crêpes trailer across ${site.serviceArea}.`,
 };
 
 function longDate(iso: string) {
@@ -30,7 +30,7 @@ export default function FindUsPage() {
             <Eyebrow>Find Us</Eyebrow>
             <h1 className="mt-5 text-5xl sm:text-6xl lg:text-7xl">where we&apos;re parked</h1>
             <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-ink/75">
-              The trailer moves around {site.serviceArea}. Here&apos;s where it&apos;ll be next.
+              The trailer moves throughout {site.serviceArea}. Here&apos;s where it&apos;ll be next.
             </p>
           </Reveal>
         </Container>

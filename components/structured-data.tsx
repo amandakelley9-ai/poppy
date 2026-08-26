@@ -6,12 +6,13 @@ import { signatureCrepes, kidsCrepes, drinks } from "@/content/menu";
  *
  * Local search does most of the work for a food trailer, so this is populated
  * properly rather than left as boilerplate. The business has no fixed
- * storefront, so it is modeled as an establishment with an `areaServed` and no
- * street address — `address` carries only the locality, which is what Google
- * expects for a service-area business.
+ * storefront, so it is modeled as a service-area business: `areaServed` names
+ * the counties, and `address` carries only region and country. Google treats
+ * addressLocality as optional in exactly this case, and inventing one would be
+ * worse than omitting it.
  *
- * TODO before launch: real phone number, confirmed service radius, and
- * `openingHoursSpecification` if the trailer keeps regular public hours.
+ * TODO before launch: real phone number, and `openingHoursSpecification` if
+ * the trailer keeps regular public hours.
  */
 export function StructuredData() {
   const schema = {
@@ -29,25 +30,21 @@ export function StructuredData() {
     logo: `${site.url}/images/logo/logo-horizontal.png`,
     slogan: site.tagline,
 
-    // Service-area business: locality only, no street address.
+    // Service-area business: no street address, no locality.
     address: {
       "@type": "PostalAddress",
-      addressLocality: site.city,
       addressRegion: site.state,
       addressCountry: "US",
     },
 
-    areaServed: {
-      "@type": "GeoCircle",
-      geoMidpoint: {
-        "@type": "GeoCoordinates",
-        // TODO: replace with the real home-base coordinates.
-        latitude: 40.4527,
-        longitude: -111.7777,
+    areaServed: site.counties.map((county) => ({
+      "@type": "AdministrativeArea",
+      name: county,
+      containedInPlace: {
+        "@type": "State",
+        name: "Utah",
       },
-      geoRadius: site.serviceRadiusMiles * 1609,
-      description: site.serviceArea,
-    },
+    })),
 
     sameAs: [site.social.instagram, site.social.facebook, site.social.tiktok].filter(Boolean),
 

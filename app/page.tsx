@@ -40,8 +40,8 @@ export default function HomePage() {
             <p className="mt-5 text-base leading-relaxed text-ink/70 sm:text-lg">
               The trailer rolls up, the griddle goes on, and everything comes off it to
               order — sweet, savory, and served with proper coffee. We cook for weddings,
-              corporate days, school events and anything else worth gathering for around{" "}
-              {site.serviceArea}.
+              corporate days, school events and anything else worth gathering for
+              across {site.serviceArea}.
             </p>
           </Reveal>
         </Container>

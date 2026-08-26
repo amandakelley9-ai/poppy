@@ -57,8 +57,7 @@ export default function CateringPage() {
           </span>
           <span aria-hidden className="hidden h-4 w-px bg-hairline sm:block" />
           <span>
-            Service radius{" "}
-            <strong className="font-semibold">{site.serviceRadiusMiles} miles</strong>
+            Serving <strong className="font-semibold">Salt Lake &amp; Utah Counties</strong>
           </span>
         </Container>
       </section>
@@ -150,8 +149,8 @@ export default function CateringPage() {
                 ))}
               </ul>
               <p className="mt-8 text-sm leading-relaxed text-ink/65">
-                Travel beyond {site.serviceRadiusMiles} miles is quoted up front. Event
-                minimum {site.pricing.eventMinimum}.
+                We serve {site.serviceArea}. Travel outside that is quoted up front.
+                Event minimum {site.pricing.eventMinimum}.
               </p>
             </Reveal>
           </div>

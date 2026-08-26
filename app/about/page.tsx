@@ -48,7 +48,7 @@ export default function AboutPage() {
                 We&apos;re women-owned and homegrown — started by a local who traded a career in
                 tech for the warmth of a kitchen and brought the craft back home. These days
                 the trailer turns up at weddings, corporate days, school fundraisers and
-                whatever else {site.city} is celebrating.
+                whatever else the valley is celebrating.
               </p>
               <p>
                 {/* TODO: replace with the real founding story — this is a

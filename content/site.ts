@@ -24,12 +24,16 @@ export const site = {
   phone: "(801) 000-0000",
   phoneHref: "+18010000000",
 
-  // TODO: confirm service area. Legacy site placed the business in Alpine, Utah
-  // and said "service area limited — ask when you enquire".
-  city: "Alpine",
+  /**
+   * There is no storefront — the trailer travels — so the business is modelled
+   * as a service area rather than an address. `serviceArea` is written to read
+   * correctly after "Serving …", "across …" and "throughout …", which is how
+   * every page uses it.
+   */
+  serviceArea: "all of Salt Lake and Utah Counties",
+  /** Used for the JSON-LD areaServed. */
+  counties: ["Salt Lake County", "Utah County"],
   state: "UT",
-  serviceArea: "Alpine, Utah and the surrounding Wasatch Front",
-  serviceRadiusMiles: 40, // TODO: confirm
 
   // TODO: response window — prompt left this blank; 24–48 hours assumed.
   responseTime: "24–48 hours",
