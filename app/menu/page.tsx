@@ -4,7 +4,13 @@ import Link from "next/link";
 import { Container, Section, SectionHeading, Eyebrow, Button } from "@/components/ui";
 import { Reveal } from "@/components/reveal";
 import { PoppyBullet } from "@/components/poppy";
-import { menuSections, drinks, dietaryLegend, type MenuItem } from "@/content/menu";
+import {
+  menuSections,
+  drinks,
+  dietaryLegend,
+  hasDietaryTags,
+  type MenuItem,
+} from "@/content/menu";
 
 export const metadata: Metadata = {
   title: "Menu",
@@ -114,21 +120,29 @@ export default function MenuPage() {
         </Container>
       </Section>
 
-      {/* Dietary legend */}
+      {/*
+        Allergy note always shows. The dietary key above it only appears while
+        some item actually carries a tag — a legend for symbols that are not on
+        the page would just be confusing.
+      */}
       <Section className="py-14">
         <Container>
           <Reveal className="mx-auto max-w-2xl rounded-[10px] border border-hairline p-6 text-sm text-ink/70">
-            <h2 className="mb-3 text-xs font-semibold uppercase tracking-[0.15em] text-gold-ink">
-              Dietary key
-            </h2>
-            <ul className="flex flex-wrap gap-x-8 gap-y-2">
-              {Object.entries(dietaryLegend).map(([tag, label]) => (
-                <li key={tag}>
-                  <span className="font-semibold text-ink">{tag}</span> — {label}
-                </li>
-              ))}
-            </ul>
-            <p className="mt-4">
+            {hasDietaryTags && (
+              <>
+                <h2 className="mb-3 text-xs font-semibold uppercase tracking-[0.15em] text-gold-ink">
+                  Dietary key
+                </h2>
+                <ul className="mb-4 flex flex-wrap gap-x-8 gap-y-2">
+                  {Object.entries(dietaryLegend).map(([tag, label]) => (
+                    <li key={tag}>
+                      <span className="font-semibold text-ink">{tag}</span> — {label}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+            <p>
               Tell us about allergies when you order — we cook everything to order, so we can
               usually work around them.
             </p>
