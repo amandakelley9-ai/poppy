@@ -18,8 +18,12 @@ export const site = {
 
   /** Primary contact address, shown in the footer and used in the JSON-LD. */
   email: "amanda@poppycrepes.com",
-  /** Where booking enquiries go. Shown on /book and in the form's fallbacks. */
-  cateringEmail: "catering@poppycrepes.com",
+  /**
+   * Where booking enquiries go. Shown on /book and in the form's fallbacks.
+   * Currently the same inbox as `email`; kept as its own field so the two can
+   * be split again without touching any of the call sites.
+   */
+  cateringEmail: "amanda@poppycrepes.com",
 
   // TODO: real phone number. The legacy site carried this placeholder too.
   phone: "(801) 000-0000",
