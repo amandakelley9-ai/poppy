@@ -16,8 +16,9 @@ export const site = {
 
   url: "https://poppycrepes.com",
 
-  // From legacy/index.html.
-  email: "hello@poppycrepes.com",
+  /** Primary contact address, shown in the footer and used in the JSON-LD. */
+  email: "amanda@poppycrepes.com",
+  /** Where booking enquiries go. Shown on /book and in the form's fallbacks. */
   cateringEmail: "catering@poppycrepes.com",
 
   // TODO: real phone number. The legacy site carried this placeholder too.

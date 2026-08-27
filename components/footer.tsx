@@ -1,6 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
-import { Mail, Phone } from "lucide-react";
+import { Mail } from "lucide-react";
 import { InstagramIcon, FacebookIcon, TikTokIcon } from "./social-icons";
 import { Container } from "./ui";
 import { site } from "@/content/site";
@@ -25,14 +24,7 @@ export function Footer() {
       <Container className="py-16 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr_1fr]">
           <div>
-            <Image
-              src="/images/logo/logo-horizontal-nav-cream.png"
-              alt="Poppy Crêpes"
-              width={256}
-              height={96}
-              className="h-11 w-auto"
-            />
-            <p className="mt-5 text-lg text-cream/90">{site.tagline}</p>
+            <p className="text-lg text-cream/90">{site.tagline}</p>
             <p className="mt-2 text-sm text-cream/70">
               Serving {site.serviceArea}.
             </p>
@@ -68,15 +60,6 @@ export function Footer() {
                 >
                   <Mail size={16} aria-hidden />
                   {site.email}
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`tel:${site.phoneHref}`}
-                  className="inline-flex min-h-[44px] items-center gap-2 text-cream/85 transition-colors hover:text-cream"
-                >
-                  <Phone size={16} aria-hidden />
-                  {site.phone}
                 </a>
               </li>
             </ul>
