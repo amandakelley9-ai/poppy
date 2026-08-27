@@ -80,7 +80,14 @@ export const eventTypes: EventType[] = [
     imageAlt:
       "A family of all ages toasting around a laden table in a leafy back garden strung with lights",
   },
-  { slug: "graduations", name: "Graduations", blurb: "Open houses and grad parties, served as guests arrive.", image: null },
+  {
+    slug: "graduations",
+    name: "Graduations",
+    blurb: "Open houses and grad parties, served as guests arrive.",
+    image: null,
+    imageAlt:
+      "A graduate in cap and gown leaning in for a selfie with two family members outdoors after the ceremony",
+  },
   {
     slug: "festivals",
     name: "Community Festivals",
