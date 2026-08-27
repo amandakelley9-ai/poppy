@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { HeroVideo } from "@/components/hero-video";
-import { Check } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, Check } from "lucide-react";
 import { Container, Section, SectionHeading, Eyebrow } from "@/components/ui";
 import { Reveal } from "@/components/reveal";
 import { HolidayBand } from "@/components/holiday-band";
@@ -76,7 +77,10 @@ export default function CateringPage() {
           <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {eventTypes.map((type, i) => (
               <Reveal key={type.slug} delay={(i % 3) * 70}>
-                <article className="group h-full overflow-hidden rounded-[10px] bg-cream-deep">
+                <Link
+                  href={`/book?event=${type.slug}`}
+                  className="group block h-full overflow-hidden rounded-[10px] bg-cream-deep transition-colors hover:bg-hairline/40"
+                >
                   <div className="relative aspect-[4/3]">
                     <Image
                       src={type.image ?? `/images/events/${type.slug}.jpg`}
@@ -90,8 +94,16 @@ export default function CateringPage() {
                   <div className="p-6">
                     <h3 className="text-xl">{type.name}</h3>
                     <p className="mt-2 text-sm leading-relaxed text-ink/70">{type.blurb}</p>
+                    <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-poppy">
+                      Book this
+                      <ArrowRight
+                        size={16}
+                        aria-hidden
+                        className="transition-transform group-hover:translate-x-1"
+                      />
+                    </span>
                   </div>
-                </article>
+                </Link>
               </Reveal>
             ))}
           </div>

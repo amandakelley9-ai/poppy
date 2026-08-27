@@ -11,8 +11,12 @@ import { signatureCrepes, kidsCrepes, drinks } from "@/content/menu";
  * addressLocality as optional in exactly this case, and inventing one would be
  * worse than omitting it.
  *
- * TODO before launch: real phone number, and `openingHoursSpecification` if
- * the trailer keeps regular public hours.
+ * No `telephone` is published: there is no real number yet, and a placeholder
+ * in structured data is worse for local search than omitting the field. Add it
+ * here once a number exists.
+ *
+ * TODO before launch: `openingHoursSpecification` if the trailer keeps regular
+ * public hours.
  */
 export function StructuredData() {
   const schema = {
@@ -22,7 +26,6 @@ export function StructuredData() {
     name: site.name,
     description: site.positioning,
     url: site.url,
-    telephone: site.phone,
     email: site.email,
     servesCuisine: ["Crêperie", "French", "Café"],
     priceRange: "$$",

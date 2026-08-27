@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Mail, Phone, Clock } from "lucide-react";
+import { Mail, Clock } from "lucide-react";
 import { Container, Section, Eyebrow } from "@/components/ui";
 import { Reveal } from "@/components/reveal";
 import { BookingFormSection } from "@/components/booking-form-section";
@@ -24,7 +24,7 @@ export default function BookPage() {
         </Reveal>
 
         {/* Reassurance + direct contact, above the form so it's seen first. */}
-        <Reveal className="mx-auto mt-12 grid max-w-3xl gap-4 sm:grid-cols-3">
+        <Reveal className="mx-auto mt-12 grid max-w-xl gap-4 sm:grid-cols-2">
           <div className="rounded-[10px] border border-hairline p-5 text-center">
             <Clock size={20} className="mx-auto text-poppy" aria-hidden />
             <p className="mt-3 text-sm font-semibold">We reply within {site.responseTime}</p>
@@ -35,13 +35,6 @@ export default function BookPage() {
           >
             <Mail size={20} className="mx-auto text-poppy" aria-hidden />
             <p className="mt-3 break-words text-sm font-semibold">{site.cateringEmail}</p>
-          </a>
-          <a
-            href={`tel:${site.phoneHref}`}
-            className="rounded-[10px] border border-hairline p-5 text-center transition-colors hover:border-poppy/40"
-          >
-            <Phone size={20} className="mx-auto text-poppy" aria-hidden />
-            <p className="mt-3 text-sm font-semibold">{site.phone}</p>
           </a>
         </Reveal>
 

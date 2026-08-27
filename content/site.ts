@@ -25,10 +25,6 @@ export const site = {
    */
   cateringEmail: "amanda@poppycrepes.com",
 
-  // TODO: real phone number. The legacy site carried this placeholder too.
-  phone: "(801) 000-0000",
-  phoneHref: "+18010000000",
-
   /**
    * There is no storefront — the trailer travels — so the business is modelled
    * as a service area rather than an address. `serviceArea` is written to read

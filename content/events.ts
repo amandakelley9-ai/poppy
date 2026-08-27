@@ -13,11 +13,17 @@ export type EventType = {
   imageAlt?: string;
   /** CSS object-position, e.g. "center 35%". Omit for centred. */
   focal?: string;
+  /**
+   * Which option the /book form should preselect when this card is clicked.
+   * Must be one of `bookingEventTypes` below — the type enforces it.
+   */
+  bookingType: BookingEventType;
 };
 
 export const eventTypes: EventType[] = [
   {
     slug: "holiday-parties",
+    bookingType: "Holiday Party",
     name: "Holiday Parties",
     blurb: "Company parties, family gatherings, and everything December throws at you.",
     image: null,
@@ -26,6 +32,7 @@ export const eventTypes: EventType[] = [
   },
   {
     slug: "corporate",
+    bookingType: "Corporate",
     name: "Corporate Events",
     blurb: "Client days, team lunches, and year-end celebrations.",
     image: null,
@@ -34,6 +41,7 @@ export const eventTypes: EventType[] = [
   },
   {
     slug: "school",
+    bookingType: "School Event",
     name: "School Events",
     blurb: "Fundraisers, teacher appreciation, and end-of-year parties.",
     image: null,
@@ -42,6 +50,7 @@ export const eventTypes: EventType[] = [
   },
   {
     slug: "private",
+    bookingType: "Private Gathering",
     name: "Private Gatherings",
     blurb: "Backyard parties and anniversaries, at whatever size.",
     image: null,
@@ -50,6 +59,7 @@ export const eventTypes: EventType[] = [
   },
   {
     slug: "brunches",
+    bookingType: "Brunch",
     name: "Brunches",
     blurb: "Late mornings that run long, with coffee to match.",
     image: null,
@@ -58,6 +68,7 @@ export const eventTypes: EventType[] = [
   },
   {
     slug: "weddings",
+    bookingType: "Wedding",
     name: "Weddings",
     blurb: "Receptions, rehearsal dinners, and late-night dessert service.",
     image: null,
@@ -66,6 +77,7 @@ export const eventTypes: EventType[] = [
   },
   {
     slug: "birthdays",
+    bookingType: "Birthday",
     name: "Birthdays",
     blurb: "A live griddle beats a sheet cake. We don't make the rules.",
     image: null,
@@ -74,6 +86,7 @@ export const eventTypes: EventType[] = [
   },
   {
     slug: "showers",
+    bookingType: "Shower",
     name: "Showers",
     blurb: "Baby and bridal showers, sweet and savory side by side.",
     image: null,
@@ -82,6 +95,7 @@ export const eventTypes: EventType[] = [
   },
   {
     slug: "graduations",
+    bookingType: "Graduation",
     name: "Graduations",
     blurb: "Open houses and grad parties, served as guests arrive.",
     image: null,
@@ -90,6 +104,7 @@ export const eventTypes: EventType[] = [
   },
   {
     slug: "festivals",
+    bookingType: "Festival/Public Event",
     name: "Community Festivals",
     blurb: "Markets, fairs, and public events — the full trailer setup.",
     image: null,
@@ -150,6 +165,26 @@ export const bookingEventTypes = [
 ] as const;
 
 export type BookingEventType = (typeof bookingEventTypes)[number];
+
+/**
+ * Maps a `?event=` query value to a booking option.
+ *
+ * Accepts an event-card slug (every catering card links with its own), plus a
+ * few short aliases that predate the cards — the holiday band has linked to
+ * `?event=holiday` since launch and those URLs may be in the wild.
+ */
+const EVENT_ALIASES: Record<string, BookingEventType> = {
+  holiday: "Holiday Party",
+  wedding: "Wedding",
+  corporate: "Corporate",
+};
+
+export function resolveBookingType(param: string | null): BookingEventType | "" {
+  if (!param) return "";
+  const card = eventTypes.find((type) => type.slug === param);
+  if (card) return card.bookingType;
+  return EVENT_ALIASES[param] ?? "";
+}
 
 /** Service-style checkboxes on the booking form. */
 export const serviceStyles = [

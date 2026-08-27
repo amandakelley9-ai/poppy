@@ -4,7 +4,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import { bookingSchema, todayISO, MIN_FILL_MS, type BookingData } from "@/lib/booking-schema";
-import { bookingEventTypes, serviceStyles } from "@/content/events";
+import { bookingEventTypes, serviceStyles, resolveBookingType } from "@/content/events";
 import { site } from "@/content/site";
 import { PoppyBloom } from "./poppy";
 
@@ -70,13 +70,11 @@ export function BookingForm() {
   }, []);
 
   /**
-   * /book?event=holiday pre-selects Holiday Party. The mapping is explicit so
-   * an unknown query value quietly falls through to the default.
+   * Preselects the event type from `?event=`, which every catering card links
+   * with. Resolution lives in content/events.ts so the cards and this form
+   * cannot drift; an unknown value falls through to no selection.
    */
-  const presetEvent =
-    ({ holiday: "Holiday Party", wedding: "Wedding", corporate: "Corporate" } as Record<string, string>)[
-      searchParams.get("event") ?? ""
-    ] ?? "";
+  const presetEvent = resolveBookingType(searchParams.get("event"));
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -185,13 +183,6 @@ export function BookingForm() {
           Thanks — your inquiry is in. We&apos;ll come back to you within{" "}
           <strong className="font-semibold text-ink">{site.responseTime}</strong> with
           availability and a menu for your event. Check your inbox for a confirmation.
-        </p>
-        <p className="mt-6 text-sm text-ink/60">
-          Need us sooner? Call{" "}
-          <a href={`tel:${site.phoneHref}`} className="font-semibold text-poppy underline underline-offset-4">
-            {site.phone}
-          </a>
-          .
         </p>
       </div>
     );
