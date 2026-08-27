@@ -26,8 +26,8 @@ export default function CateringPage() {
       */}
       <section className="on-burgundy relative isolate flex min-h-[clamp(480px,70svh,780px)] items-end overflow-hidden bg-burgundy">
         <HeroVideo
-          src="/videos/catering-hero.mp4"
-          poster="/images/catering/hero.jpg"
+          src="/videos/sweet-savory.mp4"
+          poster="/images/catering/sweet-savory-poster.jpg"
           className="absolute inset-0 -z-20 size-full object-cover"
         />
         <div

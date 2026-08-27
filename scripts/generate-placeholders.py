@@ -19,7 +19,6 @@ GOLD = (201, 160, 106)
 
 # (path, width, height, human label)
 SLOTS = [
-    ("images/crepes/hero.jpg", 2400, 1600, "Home hero — trailer or crêpe, wide"),
     ("images/crepes/poppy-crepe.jpg", 1600, 1200, "poppy crêpe (hero item)"),
     ("images/crepes/nutella-fruit.jpg", 1600, 1200, "nutella + fruit"),
     ("images/crepes/frenchie.jpg", 1600, 1200, "frenchie"),
@@ -41,7 +40,6 @@ SLOTS = [
     ("images/events/showers.jpg", 1200, 900, "Showers"),
     ("images/events/graduations.jpg", 1200, 900, "Graduations"),
     ("images/events/festivals.jpg", 1200, 900, "Community festivals"),
-    ("images/catering/hero.jpg", 2400, 1400, "Catering hero"),
 ]
 
 FONT_CANDIDATES = [

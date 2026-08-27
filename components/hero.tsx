@@ -13,8 +13,8 @@ export function Hero() {
   return (
     <section className="on-burgundy relative isolate flex min-h-[clamp(560px,82svh,860px)] items-end overflow-hidden bg-burgundy">
       <HeroVideo
-        src="/videos/hero.mp4"
-        poster="/images/crepes/hero.jpg"
+        src="/videos/chocolate-pour.mp4"
+        poster="/images/crepes/chocolate-pour-poster.jpg"
         className="absolute inset-0 -z-20 size-full object-cover"
       />
       <div

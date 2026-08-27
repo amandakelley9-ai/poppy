@@ -197,8 +197,8 @@ matching the plated crêpes on the menu board.
 
 | Path | Dimensions | What it is |
 |---|---|---|
-| `images/crepes/hero.jpg` | 1440 × 2560 | **Home hero poster.** Generated as the first frame of `videos/hero.mp4` — regenerate it alongside the video so the two match, or the hero visibly jumps when playback starts. |
-| `videos/hero.mp4` | 720 × 1280 | **Home hero background video.** See "The hero video" below. |
+| `videos/chocolate-pour.mp4` | 1080 × 1920 | **Home hero background video.** See "The hero videos" below. |
+| `images/crepes/chocolate-pour-poster.jpg` | 1080 × 1920 | Its poster — the video's own first frame. Regenerate the two together or the hero jumps when playback starts. |
 | `images/crepes/poppy-crepe.jpg` | 1000 × 1333 | **Real photo.** poppy crêpe — the hero item. Portrait 3:4; the containers crop it to 4:3 and square via `object-cover`, so keep the plate centred in any replacement. |
 | `images/crepes/nutella-fruit.jpg` | 1600 × 1200 | nutella + fruit |
 | `images/crepes/frenchie.jpg` | 1600 × 1200 | frenchie |
@@ -206,7 +206,8 @@ matching the plated crêpes on the menu board.
 | `images/crepes/pb-and-j.jpg` | 1600 × 1200 | pb&j |
 | `images/crepes/just-nutella.jpg` | 1600 × 1200 | just nutella |
 | `images/crepes/drinks.jpg` | 1600 × 1200 | Coffee & drinks *(not yet placed on a page)* |
-| `images/catering/hero.jpg` | 2400 × 1400 | Catering page hero |
+| `videos/sweet-savory.mp4` | 720 × 1280 | **Catering hero background video.** |
+| `images/catering/sweet-savory-poster.jpg` | 1440 × 2560 | Its poster — that video's own first frame. |
 | `images/trailer/trailer-exterior.jpg` | 2000 × 1333 | Trailer, exterior — used in "What's included" |
 | `images/trailer/griddle.jpg` | 1600 × 1200 | Griddle in service *(not yet placed)* |
 | `images/trailer/indoor-cart.jpg` | 1600 × 1200 | Indoor cart setup *(not yet placed)* |
@@ -226,43 +227,61 @@ Logos in `images/logo/` are the real brand files and shouldn't be replaced.
 
 ---
 
-## The hero video
+## The hero videos
 
-`public/videos/hero.mp4` plays muted and looping behind the home hero, under
-the burgundy scrim.
+Two clips play muted and looping behind the page heroes, under the burgundy
+scrim:
 
-The source is portrait phone footage (`rotation=-90` in the original), so it's
-720 × 1280. That works in its favour on mobile, where it fills the tall hero;
-on desktop `object-cover` crops it to a horizontal band, which reads as an
-intentional food close-up.
+| Page | Video | Poster |
+|---|---|---|
+| Home | `videos/chocolate-pour.mp4` | `images/crepes/chocolate-pour-poster.jpg` |
+| `/catering` | `videos/sweet-savory.mp4` | `images/catering/sweet-savory-poster.jpg` |
+
+Both are portrait phone footage. That works in their favour on mobile, where
+they fill the tall hero; on desktop `object-cover` crops to a horizontal band,
+which reads as an intentional food close-up. The catering hero is deliberately
+taller than a typical banner for this reason — a short wide band cropped the
+portrait frame to an unreadable sliver.
 
 `components/hero-video.tsx` deliberately does **not** load the video until
 after the page's `load` event, and skips it entirely for visitors who have
 `prefers-reduced-motion` set or Data Saver turned on. Those visitors keep the
 poster frame, which is the video's own first frame, so nothing looks missing.
 
-### Replacing it
+### Name assets for their content, not their page
+
+`chocolate-pour.mp4`, not `hero.mp4`. GitHub Pages serves assets with
+`cache-control: max-age=600` and gives us no way to change that, so **replacing
+a file in place leaves visitors on a stale copy for up to ten minutes.** When
+the two hero videos were first swapped under their old `hero.mp4` /
+`catering-hero.mp4` names, the result was the previous poster flashing before
+the new video started.
+
+With content-based names, swapping which video a page uses changes the URL it
+points at, and the bytes behind any given URL never change. Follow the same
+rule for replacements: new content means a new filename.
+
+### Replacing one
 
 Strip the audio and compress — never drop a phone file in directly, they're
 typically 10× too big:
 
 ```bash
-ffmpeg -i "source.mp4" -an -c:v libx264 -profile:v high -pix_fmt yuv420p \
-  -crf 33 -preset slow -movflags +faststart public/videos/hero.mp4
+NAME=my-new-clip
+
+ffmpeg -i "source.mov" -an -c:v libx264 -profile:v high -pix_fmt yuv420p \
+  -crf 33 -preset slow -movflags +faststart public/videos/$NAME.mp4
 
 # poster must be the video's first frame, or the hero jumps on play
-ffmpeg -ss 0 -i "source.mp4" -frames:v 1 -vf "scale=1440:-2" -q:v 12 \
-  public/images/crepes/hero.jpg
+ffmpeg -ss 0 -i "source.mov" -frames:v 1 -vf "scale=1080:-2" -q:v 11 \
+  public/images/crepes/$NAME-poster.jpg
 ```
+
+Then point the hero at the new names and delete the old files.
 
 `-an` strips audio. `-movflags +faststart` puts the index at the front so it
 streams rather than waiting for a full download. CRF 33 is deliberate — the
 scrim hides the difference from CRF 30 and saves a third of the file.
-
-**On length:** the current file is the full 2m27s clip at 7.3 MB. A 30-second
-excerpt encodes to about 1.4 MB and, because the footage is one continuous slow
-pan, looks identical as a background. Most visitors never watch long enough to
-see it loop. To switch, add `-ss 8 -t 30` to the command above.
 
 ---
 

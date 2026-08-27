@@ -20,6 +20,14 @@ import { useEffect, useRef } from "react";
  *
  * Muted + playsInline are what allow autoplay at all; browsers block anything
  * with sound. The file has no audio track regardless.
+ *
+ * NOTE ON FILENAMES: hero assets are named for what they show, never for the
+ * page they sit on. GitHub Pages serves them with `cache-control: max-age=600`
+ * and gives us no way to change that, so replacing a file in place leaves
+ * visitors on a stale copy for up to ten minutes — which showed up as the old
+ * poster flashing before the new video began. Content-based names mean a
+ * reassignment changes which page points at which URL, and a URL's bytes never
+ * change under it.
  */
 export function HeroVideo({
   src,
