@@ -32,14 +32,63 @@ export const eventTypes: EventType[] = [
     imageAlt:
       "Colleagues standing and talking in small groups at a bright office event space with floor-to-ceiling windows",
   },
-  { slug: "school", name: "School Events", blurb: "Fundraisers, teacher appreciation, and end-of-year parties.", image: null },
-  { slug: "private", name: "Private Gatherings", blurb: "Backyard parties and anniversaries, at whatever size.", image: null },
-  { slug: "brunches", name: "Brunches", blurb: "Late mornings that run long, with coffee to match.", image: null },
-  { slug: "weddings", name: "Weddings", blurb: "Receptions, rehearsal dinners, and late-night dessert service.", image: null },
-  { slug: "birthdays", name: "Birthdays", blurb: "A live griddle beats a sheet cake. We don't make the rules.", image: null },
-  { slug: "showers", name: "Showers", blurb: "Baby and bridal showers, sweet and savory side by side.", image: null },
+  {
+    slug: "school",
+    name: "School Events",
+    blurb: "Fundraisers, teacher appreciation, and end-of-year parties.",
+    image: null,
+    imageAlt:
+      "Parents and families seated outdoors watching children perform on a stage at a school event",
+  },
+  {
+    slug: "private",
+    name: "Private Gatherings",
+    blurb: "Backyard parties and anniversaries, at whatever size.",
+    image: null,
+    imageAlt:
+      "Friends around an outdoor table at dusk under string lights, passing a glass of wine",
+  },
+  {
+    slug: "brunches",
+    name: "Brunches",
+    blurb: "Late mornings that run long, with coffee to match.",
+    image: null,
+    imageAlt:
+      "A man at a sunlit outdoor table passing a large platter of food across to other guests",
+  },
+  {
+    slug: "weddings",
+    name: "Weddings",
+    blurb: "Receptions, rehearsal dinners, and late-night dessert service.",
+    image: null,
+    imageAlt:
+      "A long white reception table set with sage runners, patterned green glassware and a small floral centrepiece",
+  },
+  {
+    slug: "birthdays",
+    name: "Birthdays",
+    blurb: "A live griddle beats a sheet cake. We don't make the rules.",
+    image: null,
+    imageAlt:
+      "Friends laughing and raising glasses around a table with a sparkler in a champagne bucket",
+  },
+  {
+    slug: "showers",
+    name: "Showers",
+    blurb: "Baby and bridal showers, sweet and savory side by side.",
+    image: null,
+    imageAlt:
+      "A family of all ages toasting around a laden table in a leafy back garden strung with lights",
+  },
   { slug: "graduations", name: "Graduations", blurb: "Open houses and grad parties, served as guests arrive.", image: null },
-  { slug: "festivals", name: "Community Festivals", blurb: "Markets, fairs, and public events — the full trailer setup.", image: null },
+  {
+    slug: "festivals",
+    name: "Community Festivals",
+    blurb: "Markets, fairs, and public events — the full trailer setup.",
+    image: null,
+    imageAlt:
+      "Bowls of sliced strawberries, raspberries and blackberries lined up on the wooden serving counter of the crêpe stand",
+  },
 ];
 
 /** The three "what we do" cards on Home. */
