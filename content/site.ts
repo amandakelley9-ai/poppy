@@ -63,9 +63,10 @@ export const site = {
    */
   form: {
     endpoint: "https://api.web3forms.com/submit",
-    // TODO: paste your Web3Forms access key here. Until this is set, the form
-    // tells visitors to email instead of failing silently.
-    accessKey: "",
+    // Public by design: this key sits in client-side JS on every page with the
+    // form. It can only route mail to the address verified with Web3Forms and
+    // cannot read anything, so committing it is the intended usage.
+    accessKey: "d9d5e415-1979-4cdd-b504-e140562d473b",
   },
 
   /**
