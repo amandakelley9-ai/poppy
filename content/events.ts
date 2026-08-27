@@ -5,11 +5,33 @@ export type EventType = {
   blurb: string;
   /** Path under /public/images/events, or null for a labeled placeholder. */
   image: string | null;
+  /**
+   * Describe the photo once it's a real one. Left unset while the slot is
+   * still a labelled placeholder, which renders alt="" — correct, because a
+   * placeholder block carries no information the heading doesn't already give.
+   */
+  imageAlt?: string;
+  /** CSS object-position, e.g. "center 35%". Omit for centred. */
+  focal?: string;
 };
 
 export const eventTypes: EventType[] = [
-  { slug: "holiday-parties", name: "Holiday Parties", blurb: "Company parties, family gatherings, and everything December throws at you.", image: null },
-  { slug: "corporate", name: "Corporate Events", blurb: "Client days, team lunches, and year-end celebrations.", image: null },
+  {
+    slug: "holiday-parties",
+    name: "Holiday Parties",
+    blurb: "Company parties, family gatherings, and everything December throws at you.",
+    image: null,
+    imageAlt:
+      "Three friends in coats and scarves at a lit-up winter market, holding open boxes of crêpes topped with ice cream",
+  },
+  {
+    slug: "corporate",
+    name: "Corporate Events",
+    blurb: "Client days, team lunches, and year-end celebrations.",
+    image: null,
+    imageAlt:
+      "Colleagues standing and talking in small groups at a bright office event space with floor-to-ceiling windows",
+  },
   { slug: "school", name: "School Events", blurb: "Fundraisers, teacher appreciation, and end-of-year parties.", image: null },
   { slug: "private", name: "Private Gatherings", blurb: "Backyard parties and anniversaries, at whatever size.", image: null },
   { slug: "brunches", name: "Brunches", blurb: "Late mornings that run long, with coffee to match.", image: null },

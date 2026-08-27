@@ -80,9 +80,10 @@ export default function CateringPage() {
                   <div className="relative aspect-[4/3]">
                     <Image
                       src={type.image ?? `/images/events/${type.slug}.jpg`}
-                      alt=""
+                      alt={type.imageAlt ?? ""}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+                      style={type.focal ? { objectPosition: type.focal } : undefined}
                       className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                     />
                   </div>
