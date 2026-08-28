@@ -32,7 +32,9 @@ export function MenuCard({ item, size = "default" }: { item: MenuItem; size?: "d
         )}
         <div className="flex items-baseline justify-between gap-4">
           <h3 className={hero ? "text-3xl sm:text-4xl" : "text-2xl"}>{item.name}</h3>
-          <span className="shrink-0 text-sm font-semibold text-ink/70">{item.price}</span>
+          {item.price && (
+            <span className="shrink-0 text-sm font-semibold text-ink/70">{item.price}</span>
+          )}
         </div>
         <p className={`mt-3 leading-relaxed text-ink/75 ${hero ? "text-base sm:text-lg" : "text-sm"}`}>
           {item.description}

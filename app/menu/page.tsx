@@ -36,7 +36,9 @@ function Item({ item }: { item: MenuItem }) {
         <div className="flex items-baseline gap-4">
           <PoppyBullet className="mt-1.5 h-5 w-auto shrink-0 self-start" />
           <h3 className="flex-1 text-2xl sm:text-3xl">{item.name}</h3>
-          <span className="shrink-0 font-semibold text-ink/75">{item.price}</span>
+          {item.price && (
+            <span className="shrink-0 font-semibold text-ink/75">{item.price}</span>
+          )}
         </div>
 
         <p className="mt-3 leading-relaxed text-ink/75 sm:pl-8">{item.description}</p>
@@ -112,7 +114,9 @@ export default function MenuPage() {
                 <li key={drink.name} className="flex items-baseline gap-4 py-4">
                   <PoppyBullet className="h-4 w-auto shrink-0" />
                   <span className="flex-1 text-lg">{drink.name}</span>
-                  <span className="font-semibold text-ink/75">{drink.price}</span>
+                  {drink.price && (
+                    <span className="font-semibold text-ink/75">{drink.price}</span>
+                  )}
                 </li>
               ))}
             </ul>

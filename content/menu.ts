@@ -1,9 +1,10 @@
 /**
  * The menu. Edit here, never in JSX.
  *
- * Every item carries a `price` field. The brand's menu board didn't list
- * prices, so they ship as the placeholder "[[ $ ]]" — fill them in and they
- * appear on /menu automatically.
+ * Prices are blank for now, and blank prices render nothing at all rather than
+ * an empty column — put a value like "$12" on an item and it appears on /menu
+ * and in the home preview automatically. Catering pricing is separate and
+ * lives in content/site.ts.
  */
 export type DietaryTag = "V" | "GF" | "DF";
 
@@ -58,7 +59,7 @@ export const signatureCrepes: MenuItem[] = [
     slug: "poppy-crepe",
     description:
       "red velvet poppyseed crêpe, lemon cheesecake filling, raspberry compote, fresh raspberries, dark chocolate drizzle, powdered sugar",
-    price: "[[ $ ]]",
+    price: "",
     image: null,
     imageAlt:
       "The poppy crêpe on a pale plate — a folded red velvet poppyseed crêpe layered with lemon cheesecake cream and raspberry compote, topped with fresh raspberries, candied lemon slices, dark chocolate drizzle and raspberry powder",
@@ -70,7 +71,7 @@ export const signatureCrepes: MenuItem[] = [
     slug: "nutella-fruit",
     description:
       "sweet crepe, strawberries, optional banana, chantilly cream, chocolate syrup, powdered sugar",
-    price: "[[ $ ]]",
+    price: "",
     image: null,
     imageAlt:
       "The nutella + fruit crêpe on a pale plate — folded sweet crêpe with nutella and sliced strawberries, topped with a swirl of chantilly cream, chocolate syrup and powdered sugar",
@@ -80,7 +81,7 @@ export const signatureCrepes: MenuItem[] = [
     name: "frenchie",
     slug: "frenchie",
     description: "ham, gruyère cheese, dijon dressing, optional nested egg",
-    price: "[[ $ ]]",
+    price: "",
     image: null,
     imageAlt:
       "The frenchie on a pale plate — a folded savory crêpe with ham and gruyère, a nested fried egg with a runny yolk on top, dijon dressing, lemon slices and fresh cilantro",
@@ -94,7 +95,7 @@ export const signatureCrepes: MenuItem[] = [
     name: "veggie",
     slug: "veggie",
     description: "swiss cheese, spinach, cranberry, feta, balsamic glaze drizzle",
-    price: "[[ $ ]]",
+    price: "",
     image: null,
     imageAlt:
       "The veggie crêpe on a pale plate — a folded crêpe over swiss cheese and fresh spinach, scattered with crumbled feta, walnuts and dried cranberries, finished with balsamic glaze and a lemon slice",
@@ -109,7 +110,7 @@ export const kidsCrepes: MenuItem[] = [
     name: "pb&j",
     slug: "pb-and-j",
     description: "peanut butter and jam, folded simple",
-    price: "[[ $ ]]",
+    price: "",
     image: null,
     imageAlt:
       "The kids pb&j crêpe on a pale plate — a folded crêpe spread with peanut butter and strawberry jam, with two whole strawberries alongside",
@@ -119,7 +120,7 @@ export const kidsCrepes: MenuItem[] = [
     name: "just nutella",
     slug: "just-nutella",
     description: "nutella, nothing else, exactly as requested",
-    price: "[[ $ ]]",
+    price: "",
     image: null,
     imageAlt:
       "The kids just nutella crêpe on a pale plate — a folded crêpe spread with nutella, finished with chocolate drizzle and powdered sugar",
@@ -130,12 +131,12 @@ export const kidsCrepes: MenuItem[] = [
 
 /** Coffee & drinks read as a single list on the board, so they stay a list. */
 export const drinks: { name: string; price: string }[] = [
-  { name: "latte", price: "[[ $ ]]" },
-  { name: "cappuccino", price: "[[ $ ]]" },
-  { name: "americano", price: "[[ $ ]]" },
-  { name: "french hot chocolate", price: "[[ $ ]]" },
-  { name: "kids hot chocolate", price: "[[ $ ]]" },
-  { name: "bottled drinks + water", price: "[[ $ ]]" },
+  { name: "latte", price: "" },
+  { name: "cappuccino", price: "" },
+  { name: "americano", price: "" },
+  { name: "french hot chocolate", price: "" },
+  { name: "kids hot chocolate", price: "" },
+  { name: "bottled drinks + water", price: "" },
 ];
 
 export const menuSections: MenuSection[] = [
