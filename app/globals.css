@@ -2,27 +2,49 @@
 
 /* ---------------------------------------------------------------------------
    POPPY CRÊPES — brand tokens
-   Palette per the brand spec. Cream is the base surface; pure white never
-   appears as a large field.
 
-   NOTE ON `--color-poppy`: the spec lists #e31218 and calls it "the logo red".
-   Sampling the actual logo PNGs gives #ed1b24 (upper petals) and #d61a21
-   (lower petals) — #e31218 is in neither. The spec value is used here as
-   written; to snap the site to the measured logo red instead, change the one
-   line below to #ed1b24. See README "Known discrepancies".
+   Every colour below is sampled from the 2026 logo files rather than
+   transcribed from a brief. All six variants agree: the mark is #6f0e10 and
+   the cream field is #faf2e6.
+
+   The red is gone. The retired palette had `poppy` (#e31218, an accent red)
+   sitting against `burgundy` (#700a06, the dark surface). The new logo
+   contains no red at all, so `poppy` now carries the sampled burgundy and the
+   two tokens hold the same value. They are kept separate because they still
+   play different roles — `poppy` is the accent applied to type and controls,
+   `burgundy` is the surface those sit on — and collapsing them would make
+   every call site ambiguous.
+
+   `poppy-hover` exists because of that collapse: `bg-poppy hover:bg-burgundy`
+   used to be a visible red→burgundy transition and would now be a no-op. The
+   hover lightens rather than darkens; at #6f0e10's luminance a further
+   darkening is nearly imperceptible, while the tint reads clearly and still
+   holds cream text at 7.8:1.
+
+   Contrast, measured (WCAG AA needs 4.5 body / 3 large):
+     burgundy on cream ......... 10.83:1
+     cream on burgundy ......... 10.83:1
+     ink on cream .............. 18.91:1
+     gold on burgundy ........... 4.99:1
+     gold-ink on cream .......... 5.28:1
+     cream on poppy-hover ....... 7.77:1
 --------------------------------------------------------------------------- */
 @theme {
-  --color-cream:      #fdf8f3;  /* default page background */
-  --color-cream-deep: #f9efe3;  /* alternating bands, cards, logo field */
-  --color-poppy:      #e31218;  /* primary accent — CTAs, motif, hovers */
-  --color-burgundy:   #700a06;  /* dark surfaces — footer, holiday band, scrims */
+  --color-cream:      #faf2e6;  /* default page background — sampled logo cream */
+  --color-cream-deep: #f6e9d6;  /* alternating bands, cards; deepened so the
+                                   banding stays as visible as it was before
+                                   cream moved warmer */
+  --color-poppy:      #6f0e10;  /* brand primary — CTAs, links, motif, focus */
+  --color-poppy-hover:#833031;  /* hover/active tint for filled primary buttons */
+  --color-burgundy:   #6f0e10;  /* dark surfaces — footer, holiday band, scrims */
   --color-ink:        #000000;  /* headlines and body copy */
-  --color-gold:       #c9a06a;  /* eyebrows, hairlines, decorative frames */
+  --color-gold:       #c9a06a;  /* eyebrows, hairlines, frames — on burgundy */
+  --color-gold-ink:   #8a5a2b;  /* the same role on cream, where #c9a06a only
+                                   manages 2.2:1. Referenced by `text-gold-ink`
+                                   in nine places but never defined until now,
+                                   so those elements were falling back to
+                                   inherited black. */
   --color-hairline:   #e3d6c6;  /* borders and input outlines */
-
-  /* logo-accurate reds, for the motif only (matches the supplied artwork) */
-  --color-petal-light: #ed1b24;
-  --color-petal-dark:  #d61a21;
 
   --font-display: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
   --font-sans:    var(--font-poppins), ui-sans-serif, system-ui, sans-serif;

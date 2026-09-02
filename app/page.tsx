@@ -26,12 +26,16 @@ export default function HomePage() {
       <Section>
         <Container>
           <Reveal className="mx-auto max-w-3xl text-center">
+            {/* The stacked lockup runs ~1:1 where the retired horizontal one ran
+                2.7:1, so the height is raised to keep the mark's visual weight
+                on the page roughly where it was. Lazy by default — it sits
+                below the hero. */}
             <Image
-              src="/images/logo/logo-horizontal-lg.png"
-              alt="Poppy Crêpes"
-              width={428}
-              height={160}
-              className="mx-auto h-14 w-auto sm:h-16"
+              src="/images/logo/logo-primary.png"
+              alt="Poppy Crêpes — Crêperie & Café"
+              width={412}
+              height={414}
+              className="mx-auto h-24 w-auto sm:h-28"
             />
             <p className="mt-8 text-xl leading-relaxed sm:text-2xl">
               We&apos;re a mobile crêperie built around one idea: a crêpe should be folded in

@@ -1,11 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Container } from "./ui";
+import { Logo } from "./logo";
 
 const nav = [
   { href: "/menu", label: "Menu" },
@@ -30,15 +30,12 @@ export function Header() {
     <header className="sticky top-0 z-50 border-b border-hairline bg-cream/90 backdrop-blur-md">
       <Container>
         <div className="flex h-[72px] items-center justify-between gap-4">
-          <Link href="/" className="flex min-h-[44px] shrink-0 items-center" aria-label="Poppy Crêpes — home">
-            <Image
-              src="/images/logo/logo-horizontal-nav.png"
-              alt="Poppy Crêpes"
-              width={257}
-              height={96}
-              priority
-              className="h-9 w-auto sm:h-10"
-            />
+          <Link
+            href="/"
+            className="flex min-h-[44px] shrink-0 items-center"
+            aria-label="Poppy Crêpes — Crêperie & Café, home"
+          >
+            <Logo className="h-7 text-[0.95rem] sm:h-8 sm:text-base" />
           </Link>
 
           <nav aria-label="Main" className="hidden lg:block">
@@ -65,7 +62,7 @@ export function Header() {
           <div className="flex items-center gap-2">
             <Link
               href="/book"
-              className="inline-flex min-h-[44px] items-center rounded-[10px] bg-poppy px-4 text-sm font-semibold text-cream transition-colors hover:bg-burgundy sm:px-5"
+              className="inline-flex min-h-[44px] items-center rounded-[10px] bg-poppy px-4 text-sm font-semibold text-cream transition-colors hover:bg-poppy-hover sm:px-5"
             >
               <span className="hidden sm:inline">Book an Event</span>
               <span className="sm:hidden">Book</span>

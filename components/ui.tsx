@@ -84,7 +84,7 @@ type ButtonProps = {
 };
 
 const buttonVariants: Record<NonNullable<ButtonProps["variant"]>, string> = {
-  poppy: "bg-poppy text-cream hover:bg-burgundy",
+  poppy: "bg-poppy text-cream hover:bg-poppy-hover",
   "burgundy-outline":
     "border-2 border-burgundy text-burgundy hover:bg-burgundy hover:text-cream",
   cream: "bg-cream text-burgundy hover:bg-cream-deep",

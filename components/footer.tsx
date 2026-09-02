@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Mail } from "lucide-react";
 import { InstagramIcon, FacebookIcon, TikTokIcon } from "./social-icons";
 import { Container } from "./ui";
+import { Logo } from "./logo";
 import { site } from "@/content/site";
 
 const nav = [
@@ -24,6 +25,9 @@ export function Footer() {
       <Container className="py-16 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr_1fr]">
           <div>
+            {/* Reversed lockup — the burgundy mark would disappear on this
+                field, so the cream tone is the only correct one here. */}
+            <Logo tone="cream" className="mb-5 h-8 text-base" />
             <p className="text-lg text-cream/90">{site.tagline}</p>
             <p className="mt-2 text-sm text-cream/70">
               Serving {site.serviceArea}.
