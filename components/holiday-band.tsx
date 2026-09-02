@@ -1,5 +1,5 @@
 import { Container, Eyebrow, Button } from "./ui";
-import { PoppyStem } from "./poppy";
+import { PoppyBloom } from "./poppy";
 import { holiday, holidayIsActive } from "@/content/holiday";
 import Link from "next/link";
 
@@ -29,28 +29,18 @@ export function HolidayBand({ variant = "full" }: { variant?: "full" | "banner" 
       className="on-burgundy relative overflow-hidden bg-burgundy text-cream"
       aria-labelledby="holiday-heading"
     >
-      {/* Cropped stem, bleeding off the right edge. Decorative. */}
-      <PoppyStem
+      {/* Cropped mark, bleeding off the right edge. Decorative. */}
+      <PoppyBloom
         tone="cream"
-        className={`pointer-events-none absolute -right-14 -top-[6%] hidden h-[132%] opacity-95 md:block ${
-          full ? "lg:-right-6" : "lg:-right-14"
+        className={`pointer-events-none absolute top-1/2 hidden h-[68%] -translate-y-1/2 opacity-95 md:block ${
+          full ? "-right-10 lg:-right-4" : "-right-12 lg:-right-8"
         }`}
       />
-      {/* On narrow screens the stem sits behind the copy at low opacity
+      {/* On narrow screens the mark sits behind the copy at low opacity
           instead of beside it, so it never crowds the text. */}
-      <PoppyStem tone="cream" className="pointer-events-none absolute -right-24 top-0 h-full opacity-20 md:hidden" />
+      <PoppyBloom tone="cream" className="pointer-events-none absolute -right-16 top-1/2 h-[60%] -translate-y-1/2 opacity-20 md:hidden" />
 
       <Container className={full ? "relative py-24 sm:py-28 lg:py-36" : "relative py-16 sm:py-20"}>
-        {/* The notched gold frame from the menu board's catering banner. */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-5 inset-y-8 border border-gold/35 sm:inset-x-8 lg:inset-y-14"
-          style={{
-            clipPath:
-              "polygon(0 18px, 18px 0, calc(100% - 18px) 0, 100% 18px, 100% calc(100% - 18px), calc(100% - 18px) 100%, 18px 100%, 0 calc(100% - 18px))",
-          }}
-        />
-
         <div className={`relative ${full ? "max-w-2xl" : "max-w-3xl"}`}>
           <Eyebrow align="left" surface="burgundy">
             {holiday.eyebrow}

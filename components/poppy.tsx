@@ -1,4 +1,4 @@
-import { POPPY_VIEWBOX, POPPY_TRANSFORM, POPPY_MARK, POPPY_STROKE } from "@/content/poppy-paths";
+import { POPPY_VIEWBOX, POPPY_TRANSFORM, POPPY_MARK } from "@/content/poppy-paths";
 
 /**
  * The tulip motif, traced from the 2026 logo's mark.
@@ -43,37 +43,6 @@ export function PoppyBloom({
       aria-hidden={title ? undefined : true}
       focusable="false"
     >
-      <Mark tone={tone} />
-    </svg>
-  );
-}
-
-/**
- * The mark on a long sinuous stem with tapered leaves.
- *
- * The mark is the traced logo artwork; the stem and leaves are drawn to match
- * its line language — monoline, open, stroked at POPPY_STROKE so the weight
- * reads as one drawing rather than two. Used as the section divider and, at
- * larger scale, as the bleed element on the holiday band.
- */
-export function PoppyStem({
-  className,
-  tone = "burgundy",
-}: {
-  className?: string;
-  tone?: Tone;
-}) {
-  const stroke = toneVar(tone);
-  return (
-    <svg viewBox="0 0 876 1980" className={className} aria-hidden="true" focusable="false">
-      <g fill="none" stroke={stroke} strokeWidth={POPPY_STROKE} strokeLinecap="round">
-        {/* stem — one long S-curve continuing the mark's downward point */}
-        <path d="M438 806 C 438 1010, 372 1120, 356 1290 C 340 1460, 414 1590, 428 1760 C 436 1848, 432 1912, 424 1960" />
-        {/* upper leaf, sweeping right — open outline, not a filled blade */}
-        <path d="M372 1196 C 470 1146, 590 1154, 662 1206 C 578 1290, 456 1288, 372 1196 Z" />
-        {/* lower leaf, sweeping left */}
-        <path d="M392 1548 C 296 1496, 186 1506, 120 1562 C 200 1642, 314 1638, 392 1548 Z" />
-      </g>
       <Mark tone={tone} />
     </svg>
   );

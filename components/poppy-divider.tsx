@@ -1,10 +1,10 @@
-import { PoppyStem } from "./poppy";
+import { PoppyBloom } from "./poppy";
 
-/** A single stem, laid on its side, used to break long cream sections. */
+/** A single mark used to break long cream sections. */
 export function PoppyDivider() {
   return (
     <div className="flex justify-center py-4" aria-hidden>
-      <PoppyStem className="h-16 w-auto -rotate-90 opacity-80" />
+      <PoppyBloom className="h-10 w-auto opacity-80" />
     </div>
   );
 }

@@ -68,8 +68,8 @@ export default function AboutPage() {
             <PoppyBloom className="mx-auto h-20 w-auto" />
             <SectionHeading
               eyebrow="Why the poppy"
-              title="it grows where you don't plant it"
-              lede="Wild red poppies come up along the hillsides here every summer, uninvited and impossible to miss. That felt about right for a business that turns up where you are, brightens the day, and doesn't need much fuss to do it."
+              title="the red poppies of alpine"
+              lede="We're named for the grove of wild red poppies in Alpine, Utah, where our founder grew up — the ones that come back every summer in the foothills, uninvited and impossible to miss. Growing up there, you learn to stop the car for them. It's a small reminder of how easily this state hands you something worth pulling over for."
             />
           </Reveal>
         </Container>
