@@ -441,7 +441,7 @@ export function BookingForm() {
         <button
           type="submit"
           disabled={status === "sending"}
-          className="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-[10px] bg-poppy px-8 text-base font-semibold text-cream transition-colors hover:bg-burgundy disabled:cursor-not-allowed disabled:opacity-70"
+          className="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-[10px] bg-poppy px-8 text-base font-semibold text-cream transition-colors hover:bg-poppy-hover disabled:cursor-not-allowed disabled:opacity-70"
         >
           {status === "sending" && <Loader2 size={18} className="animate-spin" aria-hidden />}
           {status === "sending" ? "Sending…" : "Send Inquiry"}

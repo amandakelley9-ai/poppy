@@ -36,7 +36,9 @@ see **Hosting** below for what that means.
 ```
 .github/workflows/      Build + deploy to GitHub Pages
 app/                    Routes. One folder per page.
-  icon.tsx              Favicon, generated from the poppy motif
+  icon.svg              Favicon, drawn from the traced mark
+  apple-icon.png        180x180 iOS home-screen icon
+  manifest.ts           Web app manifest
   opengraph-image.tsx   Social share card
 components/             UI. `poppy.tsx` holds the motif.
 content/                *** Everything editable lives here ***
@@ -224,6 +226,8 @@ matching the plated crêpes on the menu board.
 | `images/events/festivals.jpg` | 1200 × 900 | Event grid |
 
 Logos in `images/logo/` are the real brand files and shouldn't be replaced.
+The six named variants are the 2026 set; `logo-glyph.png` is the tulip lifted
+out of the arch, and is what the motif and every icon are traced from.
 
 ---
 
@@ -315,12 +319,15 @@ all-caps eyebrow between hairlines, taken from the menu board's
 
 ### The poppy motif
 
-`components/poppy.tsx`. The bloom is a genuine **potrace of the logo artwork**,
-not clip-art — three stacked layers (black silhouette, dark petals, light
-petals) reproducing how the original is built, so the black reads as the heavy
-outline. Path data is generated into `content/poppy-paths.ts`; don't hand-edit
-it. The long sinuous stem and leaves on `PoppyStem` are drawn to match that line
-language.
+`components/poppy.tsx`. The mark is a genuine **potrace of the logo artwork**,
+not clip-art — the tulip lifted out of the 2026 logo's arch. It is monoline
+outline work in a single colour, so it is one path rather than the three
+stacked layers the retired bloom needed. Path data is generated into
+`content/poppy-paths.ts`; don't hand-edit it, re-run the trace. The stem and
+leaves on `PoppyStem` are stroked at `POPPY_STROKE`, the artwork's own measured
+weight, so the whole drawing reads as one hand.
+
+Pass `tone="cream"` on burgundy fields — the burgundy mark vanishes there.
 
 Used sparingly: section divider, menu list bullets, the cropped bleed on the
 holiday band, the favicon and share card.
@@ -331,19 +338,24 @@ holiday band, the favicon and share card.
 
 Worth knowing before you tweak the brand tokens.
 
-- **`poppy` is `#e31218`, but the logo's red is `#ed1b24`.** The brief specified
-  `#e31218` and called it "the logo red"; sampling the actual PNGs gives
-  `#ed1b24` for the upper petals and `#d61a21` for the lower. The spec value is
-  used for UI (buttons, links); the motif uses the measured logo colors via
-  `--color-petal-light` / `--color-petal-dark` so the artwork stays accurate. To
-  snap the whole site to the true logo red, change `--color-poppy` in
-  `app/globals.css` — it's one line.
+- **`poppy` and `burgundy` now hold the same value.** The 2026 logo contains no
+  red, so the accent red retired and `--color-poppy` took the sampled burgundy
+  `#6f0e10`. The two tokens are kept separate because they still play different
+  roles — accent vs. surface — but they resolve identically. `--color-poppy-hover`
+  exists because `bg-poppy hover:bg-burgundy` would otherwise be a no-op.
 
-- **`burgundy` and `gold` aren't in any supplied file.** They came from the
-  brief, presumably sourced from the printed menu board and crepe-cone
-  packaging, which weren't included in this repo.
+- **The header wordmark is live text, not an image.** Every supplied variant is
+  stacked and roughly square; at the header's 36–40px the lockup is illegible.
+  `components/logo.tsx` rebuilds it horizontally as the traced tulip beside
+  text. If a true horizontal lockup is ever exported, that component is the one
+  place to swap.
 
-- **The motif is the logo bloom, not the packaging illustration.** The brief
-  describes art-nouveau poppies with striped petals on multiple sinuous stems —
-  that artwork is on the packaging, which wasn't available. The logo's single
-  bold bloom was traced instead.
+- **`gold` isn't in any supplied logo file.** It came from the original brief,
+  presumably sourced from the printed menu board and crêpe-cone packaging,
+  which weren't included in this repo. `--color-gold-ink` is the darker
+  variant for cream surfaces, where `#c9a06a` only manages 2.2:1.
+
+- **Page cream is the logo cream; the band tint is not.** `--color-cream` is
+  sampled exactly (`#faf2e6`). `--color-cream-deep` is a deeper tint chosen to
+  keep the alternating bands as visible as they were before cream moved warmer
+  — it is a derived value, not a sampled one.

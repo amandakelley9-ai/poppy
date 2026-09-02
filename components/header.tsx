@@ -62,7 +62,7 @@ export function Header() {
           <div className="flex items-center gap-2">
             <Link
               href="/book"
-              className="inline-flex min-h-[44px] items-center rounded-[10px] bg-poppy px-4 text-sm font-semibold text-cream transition-colors hover:bg-burgundy sm:px-5"
+              className="inline-flex min-h-[44px] items-center rounded-[10px] bg-poppy px-4 text-sm font-semibold text-cream transition-colors hover:bg-poppy-hover sm:px-5"
             >
               <span className="hidden sm:inline">Book an Event</span>
               <span className="sm:hidden">Book</span>

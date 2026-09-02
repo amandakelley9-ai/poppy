@@ -165,7 +165,7 @@ export default function FindUsPage() {
                 href={site.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-8 inline-flex min-h-[44px] items-center gap-2 rounded-[10px] bg-poppy px-6 text-sm font-semibold text-cream transition-colors hover:bg-burgundy"
+                className="mt-8 inline-flex min-h-[44px] items-center gap-2 rounded-[10px] bg-poppy px-6 text-sm font-semibold text-cream transition-colors hover:bg-poppy-hover"
               >
                 <InstagramIcon size={18} />
                 Follow @poppycrepes
