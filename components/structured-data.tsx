@@ -30,7 +30,7 @@ export function StructuredData() {
     servesCuisine: ["Crêperie", "French", "Café"],
     priceRange: "$$",
     image: `${site.url}/opengraph-image.png`,
-    logo: `${site.url}/images/logo/logo-horizontal.png`,
+    logo: `${site.url}/images/logo/logo-primary.png`,
     slogan: site.tagline,
 
     // Service-area business: no street address, no locality.

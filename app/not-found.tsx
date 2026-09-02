@@ -6,7 +6,7 @@ export default function NotFound() {
     <Section>
       <Container>
         <div className="mx-auto max-w-xl text-center">
-          <PoppyStem className="mx-auto h-40 w-auto" treatment="solid" />
+          <PoppyStem className="mx-auto h-40 w-auto" />
           <p className="mt-8 text-sm font-semibold uppercase tracking-[0.15em] text-gold-ink">
             404
           </p>

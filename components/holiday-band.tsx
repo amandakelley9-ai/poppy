@@ -31,13 +31,14 @@ export function HolidayBand({ variant = "full" }: { variant?: "full" | "banner" 
     >
       {/* Cropped stem, bleeding off the right edge. Decorative. */}
       <PoppyStem
+        tone="cream"
         className={`pointer-events-none absolute -right-14 -top-[6%] hidden h-[132%] opacity-95 md:block ${
           full ? "lg:-right-6" : "lg:-right-14"
         }`}
       />
       {/* On narrow screens the stem sits behind the copy at low opacity
           instead of beside it, so it never crowds the text. */}
-      <PoppyStem className="pointer-events-none absolute -right-24 top-0 h-full opacity-20 md:hidden" />
+      <PoppyStem tone="cream" className="pointer-events-none absolute -right-24 top-0 h-full opacity-20 md:hidden" />
 
       <Container className={full ? "relative py-24 sm:py-28 lg:py-36" : "relative py-16 sm:py-20"}>
         {/* The notched gold frame from the menu board's catering banner. */}

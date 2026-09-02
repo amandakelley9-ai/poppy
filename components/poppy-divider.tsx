@@ -4,7 +4,7 @@ import { PoppyStem } from "./poppy";
 export function PoppyDivider() {
   return (
     <div className="flex justify-center py-4" aria-hidden>
-      <PoppyStem className="h-16 w-auto -rotate-90 opacity-80" treatment="solid" />
+      <PoppyStem className="h-16 w-auto -rotate-90 opacity-80" />
     </div>
   );
 }

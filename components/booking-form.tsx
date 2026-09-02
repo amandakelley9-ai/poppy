@@ -177,7 +177,7 @@ export function BookingForm() {
         role="status"
         className="rounded-[10px] border border-hairline bg-cream-deep p-10 text-center sm:p-14"
       >
-        <PoppyBloom className="mx-auto h-14 w-auto" treatment="solid" />
+        <PoppyBloom className="mx-auto h-14 w-auto" />
         <h3 className="mt-6 text-3xl sm:text-4xl">that&apos;s with us</h3>
         <p className="mx-auto mt-4 max-w-md leading-relaxed text-ink/75">
           Thanks — your inquiry is in. We&apos;ll come back to you within{" "}
