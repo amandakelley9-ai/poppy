@@ -29,7 +29,7 @@ export function StructuredData() {
     email: site.email,
     servesCuisine: ["Crêperie", "French", "Café"],
     priceRange: "$$",
-    image: `${site.url}/opengraph-image.png`,
+    image: `${site.url}/opengraph-image`,
     logo: `${site.url}/images/logo/logo-primary.png`,
     slogan: site.tagline,
 
