@@ -22,6 +22,20 @@ const poppins = Poppins({
   display: "swap",
 });
 
+/*
+ * The share card is a static asset, not an `opengraph-image` route.
+ *
+ * Next's file convention emits the card at `/opengraph-image` with no file
+ * extension. GitHub Pages types extensionless files as
+ * application/octet-stream, and the Facebook/X/LinkedIn scrapers reject
+ * anything that is not an image content type — so the card silently failed to
+ * render even though the bytes were a valid PNG.
+ *
+ * public/og-image.png serves as image/png. To change the card, edit that file;
+ * it is the cream mark centred on the burgundy field, 1200x630.
+ */
+const shareAlt = `${site.name} — ${site.descriptor}`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
@@ -36,8 +50,12 @@ export const metadata: Metadata = {
     url: site.url,
     title: `${site.name} — ${site.descriptor}`,
     description: site.positioning,
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: shareAlt }],
   },
-  twitter: { card: "summary_large_image" },
+  twitter: {
+    card: "summary_large_image",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: shareAlt }],
+  },
   robots: { index: true, follow: true },
 };
 

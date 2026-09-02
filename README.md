@@ -39,12 +39,16 @@ app/                    Routes. One folder per page.
   icon.svg              Favicon, drawn from the traced mark
   apple-icon.png        180x180 iOS home-screen icon
   manifest.ts           Web app manifest
-  opengraph-image.tsx   Social share card
 components/             UI. `poppy.tsx` holds the motif.
 content/                *** Everything editable lives here ***
 lib/booking-schema.ts   Form validation rules, shared by every field
 public/CNAME            Custom domain — must stay in public/
 public/.nojekyll        Stops Jekyll eating _next/ — must stay in public/
+public/og-image.png     Social share card, 1200x630. A static asset, not an
+                        `opengraph-image` route: that convention emits a file
+                        with no extension, which GitHub Pages types as
+                        application/octet-stream and every social scraper
+                        rejects.
 public/images/          Photography, organised by subject
 scripts/                Placeholder image generator
 legacy/index.html       The previous static site, kept for reference
