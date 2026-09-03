@@ -30,7 +30,19 @@ export function StructuredData() {
     servesCuisine: ["Crêperie", "French", "Café"],
     priceRange: "$$",
     image: `${site.url}/og-image.png`,
-    logo: `${site.url}/images/logo/logo-primary.png`,
+
+    /*
+     * Given as an ImageObject rather than a bare URL. Google parses either,
+     * but the explicit dimensions remove any guesswork about which asset is
+     * the logo — which matters when an old one is still cached.
+     */
+    logo: {
+      "@type": "ImageObject",
+      url: `${site.url}/images/logo/logo-primary.png`,
+      width: 412,
+      height: 414,
+      caption: `${site.name} — ${site.descriptor}`,
+    },
     slogan: site.tagline,
 
     // Service-area business: no street address, no locality.
