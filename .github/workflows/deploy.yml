@@ -9,6 +9,13 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # The schedule ("next stop" on Home, the dates on /find-us) is resolved at
+  # BUILD time, because the site is a static export — `new Date()` in
+  # content/schedule.ts is the build clock, not the visitor's. Without a
+  # rebuild the trailer would keep advertising a date that has already passed.
+  # 09:00 UTC is ~2-3am Mountain, so each day flips over before anyone looks.
+  schedule:
+    - cron: "0 9 * * *"
 
 permissions:
   contents: read
