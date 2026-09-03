@@ -1,5 +1,6 @@
 import { Container, Button } from "./ui";
 import { HeroVideo } from "./hero-video";
+import { NextStop } from "./next-stop";
 import { site } from "@/content/site";
 
 /**
@@ -8,6 +9,10 @@ import { site } from "@/content/site";
  *
  * The scrim runs bottom-heavy so type sits on the darkest part of the frame no
  * matter what the video is showing at that moment.
+ *
+ * The next-stop panel sits beside the headline on large screens and beneath it
+ * on small ones, so the first thing above the fold answers both "who is this"
+ * and "where can I actually find them".
  */
 export function Hero() {
   return (
@@ -23,24 +28,30 @@ export function Hero() {
       />
 
       <Container className="pb-16 pt-32 sm:pb-20 lg:pb-28">
-        <div className="max-w-3xl text-cream">
-          <p className="text-xs font-semibold uppercase tracking-[0.15em] text-gold sm:text-sm">
-            {site.descriptor}
-          </p>
+        <div className="flex flex-col gap-10 text-cream lg:flex-row lg:items-end lg:justify-between lg:gap-16">
+          <div className="max-w-3xl lg:max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.15em] text-gold sm:text-sm">
+              {site.descriptor}
+            </p>
 
-          <h1 className="mt-5 text-5xl sm:text-6xl lg:text-8xl">{site.tagline}</h1>
+            <h1 className="mt-5 text-5xl sm:text-6xl lg:text-7xl">{site.tagline}</h1>
 
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-cream/85 sm:text-xl">
-            {site.positioning}
-          </p>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-cream/85 sm:text-xl">
+              {site.positioning}
+            </p>
 
-          <div className="mt-9 flex flex-wrap gap-4">
-            <Button href="/book" variant="poppy">
-              Book an Event
-            </Button>
-            <Button href="/menu" variant="cream-outline">
-              See the Menu
-            </Button>
+            <div className="mt-9 flex flex-wrap gap-4">
+              <Button href="/book" variant="poppy">
+                Book an Event
+              </Button>
+              <Button href="/menu" variant="cream-outline">
+                See the Menu
+              </Button>
+            </div>
+          </div>
+
+          <div className="w-full lg:w-[23rem] lg:shrink-0">
+            <NextStop />
           </div>
         </div>
       </Container>

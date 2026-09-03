@@ -3,7 +3,7 @@ import { CalendarDays, MapPin } from "lucide-react";
 import { Container, Section, SectionHeading, Eyebrow, Button } from "@/components/ui";
 import { Reveal } from "@/components/reveal";
 import { InstagramIcon } from "@/components/social-icons";
-import { futureEntries, regularSpots, fixedLocation } from "@/content/schedule";
+import { futureEntries, regularSpots, fixedLocation, weeklySchedule } from "@/content/schedule";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -19,8 +19,18 @@ function longDate(iso: string) {
   });
 }
 
+/**
+ * The weekly pattern generates dozens of near-identical dates, so the page
+ * shows the next three weeks and lets the standing-schedule section below
+ * carry the rest. Listing all of them was a 10,000px wall of the same card.
+ */
+const DATES_SHOWN = 9;
+
 export default function FindUsPage() {
-  const upcoming = futureEntries();
+  const all = futureEntries();
+  const upcoming = all.slice(0, DATES_SHOWN);
+  const moreCount = all.length - upcoming.length;
+  const weeklyDays = weeklySchedule.map((w) => w.label);
 
   return (
     <>
@@ -85,6 +95,13 @@ export default function FindUsPage() {
                   </li>
                 ))}
               </ul>
+
+              {moreCount > 0 && (
+                <p className="mt-6 text-center text-sm text-ink/60">
+                  …and {moreCount} more — we&apos;re out every{" "}
+                  {weeklyDays.slice(0, -1).join(", ")} and {weeklyDays.at(-1)} after that.
+                </p>
+              )}
             </Reveal>
           ) : (
             <Reveal className="mx-auto mt-12 max-w-xl rounded-[10px] border border-hairline p-10 text-center">
