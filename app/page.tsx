@@ -9,7 +9,6 @@ import { PoppyDivider } from "@/components/poppy-divider";
 import { Container, Section, SectionHeading, Button, Eyebrow } from "@/components/ui";
 import { signatureCrepes } from "@/content/menu";
 import { services } from "@/content/events";
-import { testimonials } from "@/content/testimonials";
 import { futureEntries } from "@/content/schedule";
 import { site } from "@/content/site";
 
@@ -117,31 +116,6 @@ export default function HomePage() {
       </Section>
 
       <HolidayBand />
-
-      {/* Social proof */}
-      <Section band>
-        <Container>
-          <Reveal>
-            <SectionHeading eyebrow="Kind words" title="what people say after" />
-          </Reveal>
-
-          <div className="mt-14 grid gap-6 md:grid-cols-3">
-            {testimonials.map((testimonial, i) => (
-              <Reveal key={i} delay={i * 80}>
-                <figure className="flex h-full flex-col rounded-[10px] border border-hairline bg-cream p-8">
-                  <blockquote className="flex-1 text-lg leading-relaxed">
-                    “{testimonial.quote}”
-                  </blockquote>
-                  <figcaption className="mt-6 text-sm">
-                    <span className="font-semibold">{testimonial.name}</span>
-                    <span className="block text-ink/60">{testimonial.context}</span>
-                  </figcaption>
-                </figure>
-              </Reveal>
-            ))}
-          </div>
-        </Container>
-      </Section>
 
       {/* Find us teaser */}
       <Section>
