@@ -72,9 +72,9 @@ export const specialDates: ScheduleEntry[] = [
     startTime: "11:00am",
     endTime: "6:00pm",
     venue: "La Caille",
-    address: "9565 Wasatch Blvd",
-    city: "Sandy, UT 84092",
-    note: "Christmas Market — we're away from the home base this Saturday",
+    address: "9565 Wasatch Boulevard",
+    city: "Sandy, UT",
+    note: "Holiday Market at The Château — we're away from the home base this Saturday",
   },
 ];
 
