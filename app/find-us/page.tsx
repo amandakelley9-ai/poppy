@@ -27,10 +27,13 @@ function longDate(iso: string) {
 
 /**
  * The weekly pattern generates dozens of near-identical dates, so the page
- * shows the next three weeks and lets the standing-schedule section below
- * carry the rest. Listing all of them was a 10,000px wall of the same card.
+ * shows a handful and lets the standing-schedule section below carry the
+ * rest. Listing all of them was a 10,000px wall of the same card.
  */
-const DATES_SHOWN = 9;
+const DATES_SHOWN = 6;
+
+/** "Saturday", or "Thursday, Friday, and Saturday" — however many days there are. */
+const listDays = new Intl.ListFormat("en-US", { style: "long", type: "conjunction" });
 
 function DateCard({ entry }: { entry: ScheduleEntry }) {
   return (
@@ -107,7 +110,7 @@ export default function FindUsPage() {
               {moreCount > 0 && (
                 <p className="mt-6 text-center text-sm text-ink/60">
                   …and {moreCount} more — we&apos;re out every{" "}
-                  {weeklyDays.slice(0, -1).join(", ")} and {weeklyDays.at(-1)} after that.
+                  {listDays.format(weeklyDays)} after that.
                 </p>
               )}
 

@@ -2,7 +2,7 @@
  * Where the trailer will be. Powers /find-us and the Home hero.
  *
  * The trailer now has a home base — La Petite Maison in Draper — with a
- * standing Thursday/Friday/Saturday schedule. Rather than hand-listing dozens
+ * standing Saturday schedule. Rather than hand-listing dozens
  * of dates, the weekly pattern below is expanded on demand and past dates fall
  * off automatically.
  *
@@ -85,8 +85,6 @@ export const weeklySchedule: {
   startTime: string;
   endTime: string;
 }[] = [
-  { weekday: 4, label: "Thursday", startTime: "1:00pm", endTime: "6:00pm" },
-  { weekday: 5, label: "Friday", startTime: "1:00pm", endTime: "6:00pm" },
   { weekday: 6, label: "Saturday", startTime: "11:00am", endTime: "6:00pm" },
 ];
 
@@ -179,7 +177,7 @@ export function nextEntry(now: Date = new Date()): ScheduleEntry | null {
 export const regularSpots: { name: string; when: string; where: string }[] = [
   {
     name: homeBase.venue,
-    when: "Thursdays & Fridays, 1–6pm · Saturdays, 11am–6pm",
+    when: "Saturdays, 11am–6pm",
     where: `${homeBase.address}, ${homeBase.city}`,
   },
 ];
