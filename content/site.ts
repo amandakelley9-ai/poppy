@@ -41,6 +41,8 @@ export const site = {
 
   social: {
     instagram: "https://www.instagram.com/poppycrepes/", // from legacy site
+    /** Shown as the visible label wherever the Instagram link is spelled out. */
+    instagramHandle: "@poppycrepes",
     facebook: "", // TODO
     tiktok: "", // TODO — legacy site linked the label but had no URL
   },

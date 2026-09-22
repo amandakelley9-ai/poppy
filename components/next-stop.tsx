@@ -1,5 +1,5 @@
 import { CalendarDays, Clock, MapPin, ArrowUpRight } from "lucide-react";
-import { nextEntry, directionsHref, type ScheduleEntry } from "@/content/schedule";
+import { nextEntry, directionsFor, type ScheduleEntry } from "@/content/schedule";
 
 /**
  * "Next stop" panel — the soonest date the trailer is out.
@@ -63,7 +63,7 @@ export function NextStop({ entry: given }: { entry?: ScheduleEntry | null }) {
       {entry.note && <p className="mt-3 text-sm text-cream/70">{entry.note}</p>}
 
       <a
-        href={directionsHref}
+        href={directionsFor(entry)}
         target="_blank"
         rel="noopener noreferrer"
         className="mt-4 inline-flex min-h-[44px] items-center gap-1.5 text-sm font-semibold text-cream underline decoration-gold decoration-2 underline-offset-[6px] transition-colors hover:text-gold"
