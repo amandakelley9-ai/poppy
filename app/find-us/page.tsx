@@ -3,7 +3,13 @@ import { CalendarDays, MapPin } from "lucide-react";
 import { Container, Section, SectionHeading, Eyebrow, Button } from "@/components/ui";
 import { Reveal } from "@/components/reveal";
 import { InstagramIcon } from "@/components/social-icons";
-import { futureEntries, regularSpots, fixedLocation, weeklySchedule } from "@/content/schedule";
+import {
+  upcomingEntries,
+  regularSpots,
+  fixedLocation,
+  weeklySchedule,
+  type ScheduleEntry,
+} from "@/content/schedule";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -26,10 +32,47 @@ function longDate(iso: string) {
  */
 const DATES_SHOWN = 9;
 
+function DateCard({ entry }: { entry: ScheduleEntry }) {
+  return (
+    <li className="rounded-[10px] border border-hairline p-6 sm:p-7">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+        <h3 className="text-2xl">{entry.venue}</h3>
+        <p className="inline-flex items-center gap-2 text-sm font-medium text-ink/75">
+          <CalendarDays size={16} className="text-poppy" aria-hidden />
+          {longDate(entry.date)}
+        </p>
+      </div>
+
+      <p className="mt-3 inline-flex items-start gap-2 text-sm text-ink/70">
+        <MapPin size={16} className="mt-0.5 shrink-0 text-poppy" aria-hidden />
+        <span>
+          {entry.address}
+          <br />
+          {entry.city}
+        </span>
+      </p>
+
+      <p className="mt-3 text-sm font-medium">
+        {entry.startTime} – {entry.endTime}
+      </p>
+
+      {entry.note && <p className="mt-2 text-sm text-ink/60">{entry.note}</p>}
+
+      {entry.href && (
+        <a
+          href={entry.href}
+          className="mt-4 inline-flex text-sm font-semibold text-poppy underline underline-offset-4"
+        >
+          Event details
+        </a>
+      )}
+    </li>
+  );
+}
+
 export default function FindUsPage() {
-  const all = futureEntries();
-  const upcoming = all.slice(0, DATES_SHOWN);
-  const moreCount = all.length - upcoming.length;
+  const { soon: upcoming, alsoBooked, hiddenCount: moreCount } =
+    upcomingEntries(DATES_SHOWN);
   const weeklyDays = weeklySchedule.map((w) => w.label);
 
   return (
@@ -57,42 +100,7 @@ export default function FindUsPage() {
             <Reveal className="mx-auto mt-14 max-w-3xl">
               <ul className="space-y-4">
                 {upcoming.map((entry) => (
-                  <li
-                    key={`${entry.date}-${entry.venue}`}
-                    className="rounded-[10px] border border-hairline p-6 sm:p-7"
-                  >
-                    <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-                      <h3 className="text-2xl">{entry.venue}</h3>
-                      <p className="inline-flex items-center gap-2 text-sm font-medium text-ink/75">
-                        <CalendarDays size={16} className="text-poppy" aria-hidden />
-                        {longDate(entry.date)}
-                      </p>
-                    </div>
-
-                    <p className="mt-3 inline-flex items-start gap-2 text-sm text-ink/70">
-                      <MapPin size={16} className="mt-0.5 shrink-0 text-poppy" aria-hidden />
-                      <span>
-                        {entry.address}
-                        <br />
-                        {entry.city}
-                      </span>
-                    </p>
-
-                    <p className="mt-3 text-sm font-medium">
-                      {entry.startTime} – {entry.endTime}
-                    </p>
-
-                    {entry.note && <p className="mt-2 text-sm text-ink/60">{entry.note}</p>}
-
-                    {entry.href && (
-                      <a
-                        href={entry.href}
-                        className="mt-4 inline-flex text-sm font-semibold text-poppy underline underline-offset-4"
-                      >
-                        Event details
-                      </a>
-                    )}
-                  </li>
+                  <DateCard key={`${entry.date}-${entry.venue}`} entry={entry} />
                 ))}
               </ul>
 
@@ -101,6 +109,19 @@ export default function FindUsPage() {
                   …and {moreCount} more — we&apos;re out every{" "}
                   {weeklyDays.slice(0, -1).join(", ")} and {weeklyDays.at(-1)} after that.
                 </p>
+              )}
+
+              {alsoBooked.length > 0 && (
+                <div className="mt-12">
+                  <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-poppy">
+                    Further out
+                  </h3>
+                  <ul className="mt-5 space-y-4">
+                    {alsoBooked.map((entry) => (
+                      <DateCard key={`${entry.date}-${entry.venue}`} entry={entry} />
+                    ))}
+                  </ul>
+                </div>
               )}
             </Reveal>
           ) : (

@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Container } from "./ui";
 import { Logo } from "./logo";
+import { InstagramIcon } from "./social-icons";
+import { site } from "@/content/site";
 
 const nav = [
   { href: "/menu", label: "Menu" },
@@ -60,6 +62,21 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-2">
+            {/* The handle only earns its width from md up; below that the
+                glyph carries the link and the label would crowd the CTA. */}
+            <a
+              href={site.social.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Poppy Crêpes on Instagram, ${site.social.instagramHandle}`}
+              className="inline-flex min-h-[44px] items-center gap-1.5 px-1 text-sm font-medium text-ink transition-colors hover:text-poppy"
+            >
+              <InstagramIcon size={18} />
+              <span className="hidden md:inline">
+                {site.social.instagramHandle}
+              </span>
+            </a>
+
             <Link
               href="/book"
               className="inline-flex min-h-[44px] items-center rounded-[10px] bg-poppy px-4 text-sm font-semibold text-cream transition-colors hover:bg-poppy-hover sm:px-5"
@@ -102,6 +119,18 @@ export function Header() {
                   </Link>
                 </li>
               ))}
+              <li className="md:hidden">
+                <a
+                  href={site.social.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setOpen(false)}
+                  className="flex min-h-[52px] items-center gap-2 border-b border-hairline/60 text-lg font-medium last:border-0"
+                >
+                  <InstagramIcon size={20} />
+                  {site.social.instagramHandle}
+                </a>
+              </li>
             </ul>
           </Container>
         </nav>

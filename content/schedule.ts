@@ -39,7 +39,21 @@ export const homeBase = {
 const mapQuery = encodeURIComponent(
   `${homeBase.venue}, ${homeBase.address}, ${homeBase.city}`,
 );
-export const directionsHref = `https://www.google.com/maps/dir/?api=1&destination=${mapQuery}`;
+
+/**
+ * Directions to whichever venue an entry names. Special dates can sit away
+ * from the home base, so anything showing a single entry must build its link
+ * from that entry rather than reaching for `directionsHref`.
+ */
+export function directionsFor(
+  entry: Pick<ScheduleEntry, "venue" | "address" | "city">,
+): string {
+  const q = encodeURIComponent(`${entry.venue}, ${entry.address}, ${entry.city}`);
+  return `https://www.google.com/maps/dir/?api=1&destination=${q}`;
+}
+
+/** Directions to the home base — for the standing-location blocks. */
+export const directionsHref = directionsFor(homeBase);
 
 /**
  * One-off dates. These override the weekly pattern for the same day, so a
@@ -52,6 +66,15 @@ export const specialDates: ScheduleEntry[] = [
     endTime: "7:00pm",
     ...homeBase,
     note: "Opening day — joining the Fall Festival at La Petite Maison, open late",
+  },
+  {
+    date: "2026-12-05",
+    startTime: "11:00am",
+    endTime: "6:00pm",
+    venue: "La Caille",
+    address: "9565 Wasatch Blvd",
+    city: "Sandy, UT 84092",
+    note: "Christmas Market — we're away from the home base this Saturday",
   },
 ];
 
@@ -127,6 +150,24 @@ export function futureEntries(now: Date = new Date()): ScheduleEntry[] {
   return [...byDate.values()]
     .filter((e) => e.date >= today)
     .sort((a, b) => a.date.localeCompare(b.date));
+}
+
+/**
+ * What `/find-us` lists: the next `limit` dates, plus any one-off further out.
+ *
+ * The weekly pattern repeats, so cutting it short costs a visitor nothing —
+ * cutting a one-off market would hide the only notice the site gives of it.
+ */
+export function upcomingEntries(
+  limit: number,
+  now: Date = new Date(),
+): { soon: ScheduleEntry[]; alsoBooked: ScheduleEntry[]; hiddenCount: number } {
+  const special = new Set(specialDates.map((e) => e.date));
+  const all = futureEntries(now);
+  const soon = all.slice(0, limit);
+  const rest = all.slice(limit);
+  const alsoBooked = rest.filter((e) => special.has(e.date));
+  return { soon, alsoBooked, hiddenCount: rest.length - alsoBooked.length };
 }
 
 /** The very next date the trailer is out, or null if nothing is scheduled. */
