@@ -47,11 +47,11 @@ export const directionsHref = `https://www.google.com/maps/dir/?api=1&destinatio
  */
 export const specialDates: ScheduleEntry[] = [
   {
-    date: "2026-09-26",
+    date: "2026-10-10",
     startTime: "11:00am",
     endTime: "7:00pm",
     ...homeBase,
-    note: "Opening day — we're staying open late",
+    note: "Opening day — joining the Fall Festival at La Petite Maison, open late",
   },
 ];
 
@@ -68,7 +68,7 @@ export const weeklySchedule: {
 ];
 
 /** The weekly pattern starts the day after opening day. */
-export const recurringFrom = "2026-09-27";
+export const recurringFrom = "2026-10-11";
 
 /**
  * Last date the weekly pattern runs, or null for open-ended. Set this once a
