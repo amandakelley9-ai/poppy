@@ -16,7 +16,7 @@ export const dynamic = "force-static";
  * The two schedule-driven pages are the exception: their content genuinely does
  * change day to day, so for them "today" is honest.
  */
-const CONTENT_REVISED = new Date("2026-09-03T00:00:00Z");
+const CONTENT_REVISED = new Date("2026-10-13T00:00:00Z");
 
 const routes = [
   { path: "", priority: 1.0, changeFrequency: "weekly" as const, scheduleDriven: true },
@@ -24,7 +24,6 @@ const routes = [
   { path: "/menu", priority: 0.8, changeFrequency: "monthly" as const, scheduleDriven: false },
   { path: "/book", priority: 0.8, changeFrequency: "yearly" as const, scheduleDriven: false },
   { path: "/find-us", priority: 0.7, changeFrequency: "daily" as const, scheduleDriven: true },
-  { path: "/about", priority: 0.5, changeFrequency: "yearly" as const, scheduleDriven: false },
 ];
 
 /**
