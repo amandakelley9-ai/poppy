@@ -13,7 +13,6 @@ const nav = [
   { href: "/menu", label: "Menu" },
   { href: "/catering", label: "Catering" },
   { href: "/find-us", label: "Find Us" },
-  { href: "/about", label: "About" },
 ];
 
 export function Header() {
