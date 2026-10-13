@@ -1,5 +1,6 @@
 import { site } from "@/content/site";
 import { signatureCrepes, kidsCrepes, drinks } from "@/content/menu";
+import { homeBase, weeklySchedule } from "@/content/schedule";
 
 /**
  * LocalBusiness + FoodEstablishment JSON-LD.
@@ -11,13 +12,35 @@ import { signatureCrepes, kidsCrepes, drinks } from "@/content/menu";
  * addressLocality as optional in exactly this case, and inventing one would be
  * worse than omitting it.
  *
- * No `telephone` is published: there is no real number yet, and a placeholder
- * in structured data is worse for local search than omitting the field. Add it
- * here once a number exists.
+ * No `telephone` is published: the business takes enquiries by email only, and
+ * a placeholder number in structured data is worse for local search than an
+ * absent field. Add it here if that ever changes.
  *
- * TODO before launch: `openingHoursSpecification` if the trailer keeps regular
- * public hours.
+ * `openingHoursSpecification` is generated from the standing weekly schedule,
+ * so it cannot drift from what /find-us shows. One-off dates are deliberately
+ * not included — Google reads this as the recurring pattern.
  */
+
+/** Schema.org wants full day names; the schedule stores JS getDay() numbers. */
+const SCHEMA_DAYS = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+
+/** "11:00am" / "6:00pm" -> "11:00" / "18:00", which is what schema.org wants. */
+function to24h(time: string): string {
+  const m = /^(\d{1,2}):(\d{2})(am|pm)$/.exec(time.trim().toLowerCase());
+  if (!m) return time;
+  const [, h, min, suffix] = m;
+  let hour = Number(h) % 12;
+  if (suffix === "pm") hour += 12;
+  return `${String(hour).padStart(2, "0")}:${min}`;
+}
 export function StructuredData() {
   const schema = {
     "@context": "https://schema.org",
@@ -50,6 +73,32 @@ export function StructuredData() {
       "@type": "PostalAddress",
       addressRegion: site.state,
       addressCountry: "US",
+    },
+
+    /*
+     * The standing hours at the home base. Built from `weeklySchedule` so that
+     * dropping or adding a day on /find-us updates this in the same edit.
+     */
+    openingHoursSpecification: weeklySchedule.map((slot) => ({
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: `https://schema.org/${SCHEMA_DAYS[slot.weekday]}`,
+      opens: to24h(slot.startTime),
+      closes: to24h(slot.endTime),
+    })),
+
+    /* Where those hours apply. Named separately from `address` because the
+       business itself has no storefront — this is a place it parks. */
+    location: {
+      "@type": "Place",
+      name: homeBase.venue,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: homeBase.address,
+        addressLocality: "Draper",
+        addressRegion: site.state,
+        postalCode: "84020",
+        addressCountry: "US",
+      },
     },
 
     areaServed: site.counties.map((county) => ({

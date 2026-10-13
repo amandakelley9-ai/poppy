@@ -46,8 +46,12 @@ export const holiday: Holiday = {
   /* [[ CONFIRM SEASONAL MENU ]] — beyond french hot chocolate, no seasonal
      specials have been confirmed. Add them to `body` above once decided. */
 
-  /** Drives the scarcity line. Set to 0 to hide it entirely. */
-  weekendsRemaining: 4,
+  /**
+   * Drives the scarcity line. 0 hides it entirely, which is where it stays:
+   * the number cannot count itself down, and a stale "4 weekends remaining"
+   * in late December is worse than no scarcity line at all.
+   */
+  weekendsRemaining: 0,
 
   /** Optional. Set to null to omit the deadline sentence. */
   bookingDeadline: "2026-11-15",
