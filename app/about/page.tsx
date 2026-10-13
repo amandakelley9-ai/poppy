@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Container, Section, SectionHeading, Eyebrow, Button } from "@/components/ui";
 import { Reveal } from "@/components/reveal";
 import { PoppyBloom } from "@/components/poppy";
@@ -24,21 +23,13 @@ export default function AboutPage() {
 
       <Section>
         <Container>
-          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
-            <Reveal>
-              {/* 4:5 portrait — the house format for people shots. */}
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[10px] bg-cream-deep">
-                <Image
-                  src="/images/about/owner.jpg"
-                  alt="[[ TODO: describe the owner or team in this photo ]]"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
-                />
-              </div>
-            </Reveal>
-
-            <Reveal delay={80} className="space-y-6 text-lg leading-relaxed">
+          {/*
+            Single column until there is a real portrait. The two-column split
+            existed to balance a photo; with the photo gone, a half-width
+            column of body copy next to whitespace reads as a layout bug.
+          */}
+          <div className="mx-auto max-w-2xl">
+            <Reveal className="space-y-6 text-lg leading-relaxed">
               <p>
                 Poppy Crêpes started with a griddle, a trailer, and the conviction that a
                 crêpe is only as good as the minute it comes off the pan. So we don&apos;t make
@@ -51,8 +42,8 @@ export default function AboutPage() {
                 whatever else the valley is celebrating.
               </p>
               <p>
-                {/* TODO: replace with the real founding story — this is a
-                    reconstruction from the previous site's copy. */}
+                {/* TODO: owner is revising this paragraph — see the About
+                    section of the launch checklist. */}
                 The menu stays small on purpose. Four crêpes we&apos;re proud of, two for the
                 kids, and coffee worth drinking. Done properly beats done widely.
               </p>

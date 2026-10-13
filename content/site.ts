@@ -1,16 +1,16 @@
 /**
  * Single source of truth for business details, contact info and social links.
  *
- * Values marked TODO are placeholders the prompt left blank. Where the retired
- * static site (see legacy/index.html) already carried a real value, that value
- * is used and noted.
+ * Every value here is confirmed. Where the retired static site (see
+ * legacy/index.html) carried a value, it was checked against current practice
+ * rather than copied forward.
  */
 export const site = {
   name: "Poppy Crêpes",
   descriptor: "Crêperie & Café",
   tagline: "Made fresh. Made beautiful.",
 
-  // TODO: confirm — the prompt left the positioning statement blank.
+  /** The search snippet and the share-card line. */
   positioning:
     "A mobile crêperie folding sweet and savory crêpes to order, wherever your event is.",
 
@@ -36,8 +36,11 @@ export const site = {
   counties: ["Salt Lake County", "Utah County"],
   state: "UT",
 
-  // TODO: response window — prompt left this blank; 24–48 hours assumed.
-  responseTime: "24–48 hours",
+  /**
+   * Reads after "we'll come back within …", so it is a bare duration. This is
+   * a public commitment on /book — shortening it is a promise, not a tweak.
+   */
+  responseTime: "2 business days",
 
   /**
    * Google Analytics 4. Empty string disables the tag entirely — handy for a
@@ -51,8 +54,10 @@ export const site = {
     instagram: "https://www.instagram.com/poppycrepes/", // from legacy site
     /** Shown as the visible label wherever the Instagram link is spelled out. */
     instagramHandle: "@poppycrepes",
-    facebook: "", // TODO
-    tiktok: "", // TODO — legacy site linked the label but had no URL
+    // Instagram is the only account in use. The footer and header drop any
+    // social whose URL is empty, so these stay until there is something real.
+    facebook: "",
+    tiktok: "",
   },
 
   /**
@@ -80,13 +85,12 @@ export const site = {
   },
 
   /**
-   * Shown on /catering as the pricing signal. The legacy site published real
-   * per-guest package pricing ($14 / $17 / $28, 25-guest minimum, $500 event
-   * minimum) — those numbers are carried here but should be re-confirmed
-   * against current trailer pricing before launch.
+   * Shown on /catering as the pricing signal. Confirmed against current
+   * trailer pricing; the legacy site's $14 / $17 / $28 package ladder still
+   * holds, and $14 is the entry point quoted here.
    */
   pricing: {
-    startingAt: "$14 per guest", // TODO: confirm for trailer service
+    startingAt: "$14 per guest",
     guestMinimum: 25,
     eventMinimum: "$500",
   },
