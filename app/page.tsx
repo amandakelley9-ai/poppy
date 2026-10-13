@@ -12,6 +12,24 @@ import { services } from "@/content/events";
 import { futureEntries } from "@/content/schedule";
 import { site } from "@/content/site";
 
+/** The two mobile setups, shown under the intro. */
+const setups = [
+  {
+    name: "The trailer",
+    blurb:
+      "Parks up, plugs in and serves the line. Outdoor events, festivals, and our Saturdays in Draper.",
+    image: "/images/trailer/trailer-exterior.jpg",
+    alt: "The cream Poppy Crêpes trailer parked on a patio with its service window open and red-striped awnings out, red café tables and parasols beside it and mountains behind",
+  },
+  {
+    name: "The cart",
+    blurb:
+      "Rolls indoors where the trailer won't fit — ballrooms, lobbies and reception halls.",
+    image: "/images/trailer/indoor-cart.jpg",
+    alt: "A Poppy Crêpes chef in a burgundy apron folding a crêpe at the cart inside a brick-walled reception venue, two guests waiting at the counter",
+  },
+];
+
 export default function HomePage() {
   const upcoming = futureEntries().slice(0, 3);
   const hero = signatureCrepes.find((item) => item.hero)!;
@@ -47,6 +65,42 @@ export default function HomePage() {
               across {site.serviceArea}.
             </p>
           </Reveal>
+        </Container>
+      </Section>
+
+      {/*
+        The intro claims "mobile crêperie"; this is the proof, and it sits
+        directly under the claim rather than three sections later. A square
+        frame for both — the trailer is landscape and the cart portrait, and
+        anything else leaves the pair visibly mismatched.
+      */}
+      <Section className="pt-0">
+        <Container>
+          <Reveal>
+            <SectionHeading
+              eyebrow="Trailer & cart"
+              title="we bring the kitchen"
+              lede="There's no restaurant to visit — the whole setup travels. The trailer parks outside; the cart rolls in where it can't."
+            />
+          </Reveal>
+
+          <div className="mx-auto mt-14 grid max-w-4xl gap-8 sm:grid-cols-2">
+            {setups.map((setup, i) => (
+              <Reveal key={setup.name} delay={i * 80}>
+                <div className="relative aspect-square overflow-hidden rounded-[10px] bg-cream-deep">
+                  <Image
+                    src={setup.image}
+                    alt={setup.alt}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 400px"
+                    className="object-cover"
+                  />
+                </div>
+                <h3 className="mt-5 text-2xl">{setup.name}</h3>
+                <p className="mt-2 leading-relaxed text-ink/75">{setup.blurb}</p>
+              </Reveal>
+            ))}
+          </div>
         </Container>
       </Section>
 
