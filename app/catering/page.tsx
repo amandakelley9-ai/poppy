@@ -136,15 +136,10 @@ export default function CateringPage() {
         <Container>
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
             <Reveal>
-              {/*
-                4:5 is the photo's own ratio, so the frame crops nothing — the
-                canopy and the spoked wheel are what make the cart read as a
-                cart, and both sit at the edges a squarer crop would take.
-              */}
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[10px] bg-cream-deep">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[10px] bg-cream-deep">
                 <Image
-                  src="/images/trailer/indoor-cart.jpg"
-                  alt="A Poppy Crêpes chef in a burgundy apron folding a crêpe at the cart inside a brick-walled reception venue, two guests waiting at the counter beside a plated crêpe with strawberries and cream"
+                  src="/images/trailer/trailer-exterior.jpg"
+                  alt="The cream Poppy Crêpes trailer parked on a patio with its service window open and red-striped awnings out, red café tables and parasols beside it and mountains behind"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover"
@@ -170,6 +165,39 @@ export default function CateringPage() {
                 We serve {site.serviceArea}. Travel outside that is quoted up front.
                 Event minimum {site.pricing.eventMinimum}.
               </p>
+            </Reveal>
+          </div>
+        </Container>
+      </Section>
+
+      {/* Indoor counterpart to the trailer block above. */}
+      <Section band>
+        <Container>
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+            <Reveal>
+              <SectionHeading
+                eyebrow="Indoors or out"
+                title="the cart comes inside"
+                align="left"
+                lede="Where the trailer can't park — ballrooms, lobbies, reception halls — the cart rolls in instead. Same griddle, same crêpes folded in front of your guests."
+              />
+            </Reveal>
+
+            {/*
+              4:5 is the photo's own ratio, so the frame crops nothing — the
+              canopy and the spoked wheel are what make the cart read as a
+              cart, and both sit at the edges a squarer crop would take.
+            */}
+            <Reveal delay={80} className="lg:order-last">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-[10px] bg-cream">
+                <Image
+                  src="/images/trailer/indoor-cart.jpg"
+                  alt="A Poppy Crêpes chef in a burgundy apron folding a crêpe at the cart inside a brick-walled reception venue, two guests waiting at the counter beside a plated crêpe with strawberries and cream"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              </div>
             </Reveal>
           </div>
         </Container>
