@@ -54,6 +54,24 @@ export function Eyebrow({
   );
 }
 
+/**
+ * The standard vertical rhythm, split per edge.
+ *
+ * Tailwind emits responsive variants after unprefixed utilities, so a caller
+ * passing `pt-0` used to lose to this component's own `sm:py-24` everywhere
+ * above the phone breakpoint — the override appeared to work in a narrow
+ * window and silently did nothing on the layouts anyone designs for. Rather
+ * than add a class-merging dependency for one component, the default is simply
+ * not emitted on an edge the caller has spoken for.
+ */
+const SECTION_PT = "pt-20 sm:pt-24 lg:pt-32";
+const SECTION_PB = "pb-20 sm:pb-24 lg:pb-32";
+
+/** True when `className` sets padding on this edge, at any breakpoint. */
+function overridesPadding(className: string, edge: "t" | "b"): boolean {
+  return new RegExp(`(?:^|\\s)(?:[a-z]+:)*p[y${edge}]-`).test(className);
+}
+
 /** Section shell: vertical rhythm, optional cream-deep band. */
 export function Section({
   children,
@@ -66,10 +84,17 @@ export function Section({
   className?: string;
   id?: string;
 }) {
+  const padding = [
+    overridesPadding(className, "t") ? "" : SECTION_PT,
+    overridesPadding(className, "b") ? "" : SECTION_PB,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
     <section
       id={id}
-      className={`py-20 sm:py-24 lg:py-32 ${band ? "bg-cream-deep" : ""} ${className}`}
+      className={`${padding} ${band ? "bg-cream-deep" : ""} ${className}`}
     >
       {children}
     </section>
