@@ -39,6 +39,14 @@ export const site = {
   // TODO: response window — prompt left this blank; 24–48 hours assumed.
   responseTime: "24–48 hours",
 
+  /**
+   * Google Analytics 4. Empty string disables the tag entirely — handy for a
+   * fork or a staging copy that shouldn't pollute the property's numbers.
+   */
+  analytics: {
+    gaMeasurementId: "G-NH5K8J78YC",
+  },
+
   social: {
     instagram: "https://www.instagram.com/poppycrepes/", // from legacy site
     /** Shown as the visible label wherever the Instagram link is spelled out. */

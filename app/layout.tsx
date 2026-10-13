@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { StructuredData } from "@/components/structured-data";
+import { Analytics } from "@/components/analytics";
 import { site } from "@/content/site";
 import "./globals.css";
 
@@ -88,6 +89,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main">{children}</main>
         <Footer />
         <StructuredData />
+        <Analytics />
       </body>
     </html>
   );
